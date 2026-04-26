@@ -1,0 +1,343 @@
+2026-04-18T17:27:58.6019269Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-18T17:28:01.6256542Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-18T17:28:01.6265698Z Container start method called.
+2026-04-18T17:28:01.6462756Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T17:28:01.6467562Z Establishing network.
+2026-04-18T17:28:01.6672713Z Pulling image: appsvc/python:3.11_20260203.2.tuxprod.
+2026-04-18T17:28:02.4711151Z Container is starting.
+2026-04-18T17:28:02.4793777Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T17:28:02.4795871Z Establishing user namespace if not established already.
+2026-04-18T17:28:02.4884059Z Establishing network if not established already.
+2026-04-18T17:28:02.4886353Z Mounting volumes.
+2026-04-18T17:28:02.4986484Z Nested mountpoint 
+2026-04-18T17:28:02.6290902Z Nested mountpoint volatile/logs
+2026-04-18T17:28:02.6808929Z Nested mountpoint 
+2026-04-18T17:28:02.9815330Z Nested mountpoint 
+2026-04-18T17:28:03.0327113Z Nested mountpoint 
+2026-04-18T17:28:04.1854800Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-18T17:28:04.1860024Z Creating container.
+2026-04-18T17:28:04.1863090Z Creating pipes for streaming container io.
+2026-04-18T17:28:04.1865041Z Creating stdout named pipe at /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stdout_f002514e3cbe48de953861f1e4af7413.
+2026-04-18T17:28:04.1885079Z Successfully created stdout named pipe at: /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stdout_f002514e3cbe48de953861f1e4af7413.
+2026-04-18T17:28:04.2072672Z Opening named pipe /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stdout_f002514e3cbe48de953861f1e4af7413 for reading in non-blocking mode.
+2026-04-18T17:28:04.2082839Z Successfully opened named pipe: /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stdout_f002514e3cbe48de953861f1e4af7413.
+2026-04-18T17:28:04.2084688Z Successfully removed non-blocking flag from /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stdout_f002514e3cbe48de953861f1e4af7413.
+2026-04-18T17:28:04.2169034Z Creating stderr named pipe at /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stderr_11cc54885da440f6bc61e83fcbe27448.
+2026-04-18T17:28:04.2170926Z Successfully created stderr named pipe at: /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stderr_11cc54885da440f6bc61e83fcbe27448.
+2026-04-18T17:28:04.2171805Z Opening named pipe /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stderr_11cc54885da440f6bc61e83fcbe27448 for reading in non-blocking mode.
+2026-04-18T17:28:04.2172777Z Successfully opened named pipe: /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stderr_11cc54885da440f6bc61e83fcbe27448.
+2026-04-18T17:28:04.2173490Z Successfully removed non-blocking flag from /podr/container/pipe/782e4cbd371f_cwaya-ai-share/stderr_11cc54885da440f6bc61e83fcbe27448.
+2026-04-18T17:28:04.2175459Z Creating container with image: appsvc/python:3.11_20260203.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod
+2026-04-18T17:28:05.7293932Z Starting container: 782e4cbd371f_cwaya-ai-share.
+2026-04-18T17:28:05.9591852Z Starting watchers and probes.
+2026-04-18T17:28:06.0107048Z Starting metrics collection.
+2026-04-18T17:28:06.0301288Z Container is running.
+2026-04-18T17:28:06.0307721Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T17:28:06.7903022Z Container start method finished after 5138 ms.
+2026-04-18T17:28:06.7905747Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T17:28:06.7906051Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-18T17:31:56.9586103Z Site startup probe failed after 230.0314521 seconds.
+2026-04-18T17:31:57.1915305Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:31:57.2184192Z Failed to start site. Revert by stopping site.
+2026-04-18T17:31:57.2522826Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:31:57.2805691Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:31:57.3092000Z Container is terminating. Grace period: 5 seconds.
+2026-04-18T17:31:57.4113912Z Stop and delete container. Retry count = 0
+2026-04-18T17:31:57.4308434Z Stopping container: 782e4cbd371f_cwaya-ai-share.
+2026-04-18T17:32:03.1348928Z Deleting container: 782e4cbd371f_cwaya-ai-share. Retry count = 0
+2026-04-18T17:32:10.2280775Z Container spec TerminationMessagePolicy  path 
+2026-04-18T17:32:10.2411227Z Container is terminated. Total time elapsed: 12928 ms.
+2026-04-18T17:32:10.2481987Z Site container: cwaya-ai-share terminated during site startup.
+2026-04-18T17:32:10.2504612Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:32:10.2792057Z Site: cwaya-ai-share stopped.
+2026-04-18T17:32:10.3485897Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:32:11.1817584Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:32:11.8950457Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:32:11 (UTC), DetailsLevel: ERR
+2026-04-18T17:32:12.1231911Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:32:11 (UTC), DetailsLevel: ERR
+2026-04-18T17:32:18.0618242Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:32:11 (UTC), DetailsLevel: ERR
+2026-04-18T17:32:22.4371219Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:32:11 (UTC), DetailsLevel: ERR
+2026-04-18T17:32:22.4373272Z Container start method called.
+2026-04-18T17:32:22.4862753Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T17:32:22.4866048Z Establishing network.
+2026-04-18T17:32:22.4867397Z Pulling image: appsvc/python:3.11_20260203.2.tuxprod.
+2026-04-18T17:32:23.2600749Z Container is starting.
+2026-04-18T17:32:23.2604587Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T17:32:23.2606467Z Establishing user namespace if not established already.
+2026-04-18T17:32:23.2683457Z Establishing network if not established already.
+2026-04-18T17:32:23.2686523Z Mounting volumes.
+2026-04-18T17:32:23.2691465Z Nested mountpoint 
+2026-04-18T17:32:23.3407318Z Nested mountpoint volatile/logs
+2026-04-18T17:32:23.3906009Z Nested mountpoint 
+2026-04-18T17:32:23.5205803Z Nested mountpoint 
+2026-04-18T17:32:23.7118338Z Nested mountpoint 
+2026-04-18T17:32:24.4265521Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-18T17:32:24.4349621Z Creating container.
+2026-04-18T17:32:24.4368309Z Creating pipes for streaming container io.
+2026-04-18T17:32:24.4370507Z Creating stdout named pipe at /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stdout_b07de337368946aaa42358404ff247d7.
+2026-04-18T17:32:24.4460993Z Successfully created stdout named pipe at: /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stdout_b07de337368946aaa42358404ff247d7.
+2026-04-18T17:32:24.4462050Z Opening named pipe /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stdout_b07de337368946aaa42358404ff247d7 for reading in non-blocking mode.
+2026-04-18T17:32:24.4463165Z Successfully opened named pipe: /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stdout_b07de337368946aaa42358404ff247d7.
+2026-04-18T17:32:24.4463924Z Successfully removed non-blocking flag from /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stdout_b07de337368946aaa42358404ff247d7.
+2026-04-18T17:32:24.4465294Z Creating stderr named pipe at /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stderr_5a8cbdf4fb3f42b4aa5a75624570ee32.
+2026-04-18T17:32:24.4466583Z Successfully created stderr named pipe at: /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stderr_5a8cbdf4fb3f42b4aa5a75624570ee32.
+2026-04-18T17:32:24.4467439Z Opening named pipe /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stderr_5a8cbdf4fb3f42b4aa5a75624570ee32 for reading in non-blocking mode.
+2026-04-18T17:32:24.4468365Z Successfully opened named pipe: /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stderr_5a8cbdf4fb3f42b4aa5a75624570ee32.
+2026-04-18T17:32:24.4764297Z Successfully removed non-blocking flag from /podr/container/pipe/c24a8f5b8c20_cwaya-ai-share/stderr_5a8cbdf4fb3f42b4aa5a75624570ee32.
+2026-04-18T17:32:24.4767029Z Creating container with image: appsvc/python:3.11_20260203.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod
+2026-04-18T17:32:25.8843632Z Starting container: c24a8f5b8c20_cwaya-ai-share.
+2026-04-18T17:32:26.0125607Z Starting watchers and probes.
+2026-04-18T17:32:26.0323688Z Starting metrics collection.
+2026-04-18T17:32:26.0328057Z Container is running.
+2026-04-18T17:32:26.0329352Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T17:32:26.5460310Z Container start method finished after 4108 ms.
+2026-04-18T17:32:26.5462789Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T17:32:26.5463059Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:31:57, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-18T17:36:17.6282596Z Site startup probe failed after 231.0403687 seconds.
+2026-04-18T17:36:18.0200879Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:36:18.0398026Z Failed to start site. Revert by stopping site.
+2026-04-18T17:36:18.0514468Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:36:18.0682901Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:36:18.0714746Z Container is terminating. Grace period: 5 seconds.
+2026-04-18T17:36:18.2305290Z Stop and delete container. Retry count = 0
+2026-04-18T17:36:18.2312440Z Stopping container: c24a8f5b8c20_cwaya-ai-share.
+2026-04-18T17:36:23.8767727Z Deleting container: c24a8f5b8c20_cwaya-ai-share. Retry count = 0
+2026-04-18T17:36:28.5077246Z Container spec TerminationMessagePolicy  path 
+2026-04-18T17:36:28.5252275Z Container is terminated. Total time elapsed: 10444 ms.
+2026-04-18T17:36:28.5265409Z Site container: cwaya-ai-share terminated during site startup.
+2026-04-18T17:36:28.5277157Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:36:28.5372816Z Site: cwaya-ai-share stopped.
+2026-04-18T17:36:28.5769331Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:36:29.2305033Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:36:29.4817091Z Site: cwaya-ai-share will be blocked for 1 minutes till 04/18/2026 17:37:29
+2026-04-18T17:36:29.4830502Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: cwaya-ai-share will be blocked for 1 minutes till 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:36:29.5334667Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:36:29 (UTC), DetailsLevel: WARN
+2026-04-18T17:36:30.0145154Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:36:29 (UTC), DetailsLevel: WARN
+2026-04-18T17:36:35.6826892Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:36:35.6827665Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:36:40.8334535Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:36:40.8346228Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:36:46.2692704Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:36:46.2698757Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:36:51.5540610Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:36:51.5541301Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:36:57.0320557Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:36:57.0322948Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:37:02.4120462Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:37:02.4120793Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:37:07.6006819Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:37:07.6007563Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:37:12.8903318Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:37:12.8903675Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:37:18.1216237Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:37:18.1216831Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:37:23.4603929Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:37:23.4605726Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:37:28.6474699Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:37:28.6475015Z Start site prohibitted because the site is being blocked.
+2026-04-18T17:37:29.4839819Z Site: cwaya-ai-share is unblocked.
+2026-04-18T17:37:33.9470641Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:37:36.1744492Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:37:29, DetailsLevel: WARN
+2026-04-18T17:37:36.1745729Z Container start method called.
+2026-04-18T17:37:36.1848006Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T17:37:36.1850616Z Establishing network.
+2026-04-18T17:37:36.2054294Z Pulling image: appsvc/python:3.11_20260203.2.tuxprod.
+2026-04-18T17:37:36.7924190Z Container is starting.
+2026-04-18T17:37:36.7934355Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T17:37:36.7939489Z Establishing user namespace if not established already.
+2026-04-18T17:37:36.8015589Z Establishing network if not established already.
+2026-04-18T17:37:36.8096263Z Mounting volumes.
+2026-04-18T17:37:36.8207956Z Nested mountpoint 
+2026-04-18T17:37:36.8824813Z Nested mountpoint volatile/logs
+2026-04-18T17:37:36.9419314Z Nested mountpoint 
+2026-04-18T17:37:36.9913933Z Nested mountpoint 
+2026-04-18T17:37:37.0333041Z Nested mountpoint 
+2026-04-18T17:37:37.7340970Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-18T17:37:37.7352134Z Creating container.
+2026-04-18T17:37:37.7357441Z Creating pipes for streaming container io.
+2026-04-18T17:37:37.7363148Z Creating stdout named pipe at /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stdout_9616e22695f84cc9afbadfa16d2a3163.
+2026-04-18T17:37:37.7453506Z Successfully created stdout named pipe at: /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stdout_9616e22695f84cc9afbadfa16d2a3163.
+2026-04-18T17:37:37.7455627Z Opening named pipe /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stdout_9616e22695f84cc9afbadfa16d2a3163 for reading in non-blocking mode.
+2026-04-18T17:37:37.7557033Z Successfully opened named pipe: /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stdout_9616e22695f84cc9afbadfa16d2a3163.
+2026-04-18T17:37:37.7641568Z Successfully removed non-blocking flag from /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stdout_9616e22695f84cc9afbadfa16d2a3163.
+2026-04-18T17:37:37.7663667Z Creating stderr named pipe at /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stderr_fa3324374dd24281bfbe3a996a9f5278.
+2026-04-18T17:37:37.7665769Z Successfully created stderr named pipe at: /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stderr_fa3324374dd24281bfbe3a996a9f5278.
+2026-04-18T17:37:37.7666535Z Opening named pipe /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stderr_fa3324374dd24281bfbe3a996a9f5278 for reading in non-blocking mode.
+2026-04-18T17:37:37.7667472Z Successfully opened named pipe: /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stderr_fa3324374dd24281bfbe3a996a9f5278.
+2026-04-18T17:37:37.7668296Z Successfully removed non-blocking flag from /podr/container/pipe/6c31b9cdab67_cwaya-ai-share/stderr_fa3324374dd24281bfbe3a996a9f5278.
+2026-04-18T17:37:37.7753657Z Creating container with image: appsvc/python:3.11_20260203.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod
+2026-04-18T17:37:38.4523901Z Starting container: 6c31b9cdab67_cwaya-ai-share.
+2026-04-18T17:37:38.5165935Z Starting watchers and probes.
+2026-04-18T17:37:38.5265042Z Starting metrics collection.
+2026-04-18T17:37:38.5429126Z Container is running.
+2026-04-18T17:37:38.5434523Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T17:37:38.9510143Z Container start method finished after 2776 ms.
+2026-04-18T17:37:39.0082546Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T17:37:39.0090527Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:36:17, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-18T17:41:29.1595673Z Site startup probe failed after 230.0678301 seconds.
+2026-04-18T17:41:29.5773265Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:41:29.7691487Z Failed to start site. Revert by stopping site.
+2026-04-18T17:41:29.8191714Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:41:29.8785158Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:41:29.8902290Z Container is terminating. Grace period: 5 seconds.
+2026-04-18T17:41:30.1529563Z Stop and delete container. Retry count = 0
+2026-04-18T17:41:30.2008611Z Stopping container: 6c31b9cdab67_cwaya-ai-share.
+2026-04-18T17:41:35.6938532Z Deleting container: 6c31b9cdab67_cwaya-ai-share. Retry count = 0
+2026-04-18T17:41:39.2248028Z Container spec TerminationMessagePolicy  path 
+2026-04-18T17:41:39.2337199Z Container is terminated. Total time elapsed: 9315 ms.
+2026-04-18T17:41:39.2412327Z Site container: cwaya-ai-share terminated during site startup.
+2026-04-18T17:41:39.2425411Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:41:39.2529805Z Site: cwaya-ai-share stopped.
+2026-04-18T17:41:39.2631300Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:41:39.9981370Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:41:40.3689700Z Site: cwaya-ai-share will be blocked for 1 minutes till 04/18/2026 17:42:40
+2026-04-18T17:41:40.3771857Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: cwaya-ai-share will be blocked for 1 minutes till 04/18/2026 17:42:40, DetailsLevel: WARN
+2026-04-18T17:41:40.4278495Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:41:40 (UTC), DetailsLevel: WARN
+2026-04-18T17:41:40.8440888Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:41:40 (UTC), DetailsLevel: WARN
+2026-04-18T17:42:40.3690064Z Site: cwaya-ai-share is unblocked.
+2026-04-18T17:47:30.1904988Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:41:40 (UTC), DetailsLevel: WARN
+2026-04-18T17:47:32.3992356Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 17:41:40 (UTC), DetailsLevel: WARN
+2026-04-18T17:47:32.3994880Z Container start method called.
+2026-04-18T17:47:32.4000901Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T17:47:32.4002938Z Establishing network.
+2026-04-18T17:47:32.4019922Z Pulling image: appsvc/python:3.11_20260203.2.tuxprod.
+2026-04-18T17:47:32.8616916Z Container is starting.
+2026-04-18T17:47:32.8618666Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T17:47:32.8620023Z Establishing user namespace if not established already.
+2026-04-18T17:47:32.8626468Z Establishing network if not established already.
+2026-04-18T17:47:32.8628128Z Mounting volumes.
+2026-04-18T17:47:32.9031456Z Nested mountpoint 
+2026-04-18T17:47:32.9825563Z Nested mountpoint volatile/logs
+2026-04-18T17:47:33.0020897Z Nested mountpoint 
+2026-04-18T17:47:33.0628660Z Nested mountpoint 
+2026-04-18T17:47:33.0835457Z Nested mountpoint 
+2026-04-18T17:47:33.5687723Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-18T17:47:33.5753541Z Creating container.
+2026-04-18T17:47:33.5757215Z Creating pipes for streaming container io.
+2026-04-18T17:47:33.5758704Z Creating stdout named pipe at /podr/container/pipe/49af1085b270_cwaya-ai-share/stdout_2657c506dd4b4d86b340a6b401dbd8dd.
+2026-04-18T17:47:33.5764344Z Successfully created stdout named pipe at: /podr/container/pipe/49af1085b270_cwaya-ai-share/stdout_2657c506dd4b4d86b340a6b401dbd8dd.
+2026-04-18T17:47:33.5765673Z Opening named pipe /podr/container/pipe/49af1085b270_cwaya-ai-share/stdout_2657c506dd4b4d86b340a6b401dbd8dd for reading in non-blocking mode.
+2026-04-18T17:47:33.5767229Z Successfully opened named pipe: /podr/container/pipe/49af1085b270_cwaya-ai-share/stdout_2657c506dd4b4d86b340a6b401dbd8dd.
+2026-04-18T17:47:33.5768393Z Successfully removed non-blocking flag from /podr/container/pipe/49af1085b270_cwaya-ai-share/stdout_2657c506dd4b4d86b340a6b401dbd8dd.
+2026-04-18T17:47:33.5873119Z Creating stderr named pipe at /podr/container/pipe/49af1085b270_cwaya-ai-share/stderr_7b65ff47075e4ad098d138c493ec254a.
+2026-04-18T17:47:33.5876233Z Successfully created stderr named pipe at: /podr/container/pipe/49af1085b270_cwaya-ai-share/stderr_7b65ff47075e4ad098d138c493ec254a.
+2026-04-18T17:47:33.5877198Z Opening named pipe /podr/container/pipe/49af1085b270_cwaya-ai-share/stderr_7b65ff47075e4ad098d138c493ec254a for reading in non-blocking mode.
+2026-04-18T17:47:33.5878417Z Successfully opened named pipe: /podr/container/pipe/49af1085b270_cwaya-ai-share/stderr_7b65ff47075e4ad098d138c493ec254a.
+2026-04-18T17:47:33.5879226Z Successfully removed non-blocking flag from /podr/container/pipe/49af1085b270_cwaya-ai-share/stderr_7b65ff47075e4ad098d138c493ec254a.
+2026-04-18T17:47:33.5881066Z Creating container with image: appsvc/python:3.11_20260203.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod
+2026-04-18T17:47:34.9120879Z Starting container: 49af1085b270_cwaya-ai-share.
+2026-04-18T17:47:35.0241163Z Starting watchers and probes.
+2026-04-18T17:47:35.0426893Z Starting metrics collection.
+2026-04-18T17:47:35.0434109Z Container is running.
+2026-04-18T17:47:35.0435734Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T17:47:35.2371284Z Container start method finished after 2837 ms.
+2026-04-18T17:47:35.2373236Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T17:47:35.2373467Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:41:29, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-18T17:51:25.3817595Z Site startup probe failed after 230.0380306 seconds.
+2026-04-18T17:51:25.6194024Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:51:25.7297391Z Failed to start site. Revert by stopping site.
+2026-04-18T17:51:25.7729232Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:51:25.7862481Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-04-18T17:51:25.8520221Z Container is terminating. Grace period: 5 seconds.
+2026-04-18T17:51:26.1388544Z Stop and delete container. Retry count = 0
+2026-04-18T17:51:26.1655891Z Stopping container: 49af1085b270_cwaya-ai-share.
+2026-04-18T17:51:32.3201445Z Deleting container: 49af1085b270_cwaya-ai-share. Retry count = 0
+2026-04-18T17:51:36.2284192Z Container spec TerminationMessagePolicy  path 
+2026-04-18T17:51:36.2556149Z Container is terminated. Total time elapsed: 10401 ms.
+2026-04-18T17:51:36.2587977Z Site container: cwaya-ai-share terminated during site startup.
+2026-04-18T17:51:36.2598285Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T17:51:36.2624696Z Site: cwaya-ai-share stopped.
+2026-04-18T18:18:09.6954437Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:53:37, DetailsLevel: WARN
+2026-04-18T18:18:13.0958825Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 04/18/2026 17:53:37, DetailsLevel: WARN
+2026-04-18T18:18:13.1041161Z Container start method called.
+2026-04-18T18:18:13.1051937Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T18:18:13.1058176Z Establishing network.
+2026-04-18T18:18:13.1238392Z Pulling image: appsvc/python:3.11_20260203.2.tuxprod.
+2026-04-18T18:18:14.0345363Z Container is starting.
+2026-04-18T18:18:14.0408586Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T18:18:14.0414362Z Establishing user namespace if not established already.
+2026-04-18T18:18:14.0705005Z Establishing network if not established already.
+2026-04-18T18:18:14.0793147Z Mounting volumes.
+2026-04-18T18:18:14.0891421Z Nested mountpoint 
+2026-04-18T18:18:14.1647658Z Nested mountpoint volatile/logs
+2026-04-18T18:18:14.1859525Z Nested mountpoint 
+2026-04-18T18:18:14.2258041Z Nested mountpoint 
+2026-04-18T18:18:14.3347420Z Nested mountpoint 
+2026-04-18T18:18:15.1111969Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-18T18:18:15.1175138Z Creating container.
+2026-04-18T18:18:15.1183548Z Creating pipes for streaming container io.
+2026-04-18T18:18:15.1194887Z Creating stdout named pipe at /podr/container/pipe/7353c300cab5_cwaya-ai-share/stdout_b074b0ebf87f485ba95b387566eb60f4.
+2026-04-18T18:18:15.1278633Z Successfully created stdout named pipe at: /podr/container/pipe/7353c300cab5_cwaya-ai-share/stdout_b074b0ebf87f485ba95b387566eb60f4.
+2026-04-18T18:18:15.1282131Z Opening named pipe /podr/container/pipe/7353c300cab5_cwaya-ai-share/stdout_b074b0ebf87f485ba95b387566eb60f4 for reading in non-blocking mode.
+2026-04-18T18:18:15.1283300Z Successfully opened named pipe: /podr/container/pipe/7353c300cab5_cwaya-ai-share/stdout_b074b0ebf87f485ba95b387566eb60f4.
+2026-04-18T18:18:15.1284251Z Successfully removed non-blocking flag from /podr/container/pipe/7353c300cab5_cwaya-ai-share/stdout_b074b0ebf87f485ba95b387566eb60f4.
+2026-04-18T18:18:15.1673232Z Creating stderr named pipe at /podr/container/pipe/7353c300cab5_cwaya-ai-share/stderr_41c9e8efd7ec4109bf4327efa3b38242.
+2026-04-18T18:18:15.1680326Z Successfully created stderr named pipe at: /podr/container/pipe/7353c300cab5_cwaya-ai-share/stderr_41c9e8efd7ec4109bf4327efa3b38242.
+2026-04-18T18:18:15.1681717Z Opening named pipe /podr/container/pipe/7353c300cab5_cwaya-ai-share/stderr_41c9e8efd7ec4109bf4327efa3b38242 for reading in non-blocking mode.
+2026-04-18T18:18:15.1687463Z Successfully opened named pipe: /podr/container/pipe/7353c300cab5_cwaya-ai-share/stderr_41c9e8efd7ec4109bf4327efa3b38242.
+2026-04-18T18:18:15.1689768Z Successfully removed non-blocking flag from /podr/container/pipe/7353c300cab5_cwaya-ai-share/stderr_41c9e8efd7ec4109bf4327efa3b38242.
+2026-04-18T18:18:15.1698244Z Creating container with image: appsvc/python:3.11_20260203.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod
+2026-04-18T18:18:16.5709729Z Starting container: 7353c300cab5_cwaya-ai-share.
+2026-04-18T18:18:16.8602772Z Starting watchers and probes.
+2026-04-18T18:18:16.8781274Z Starting metrics collection.
+2026-04-18T18:18:16.8890633Z Container is running.
+2026-04-18T18:18:16.8897169Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T18:18:17.2426807Z Container start method finished after 4068 ms.
+2026-04-18T18:18:17.2600858Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T18:18:17.2604645Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-18T18:20:58.7598408Z Container has finished running with exit code: 3.
+2026-04-18T18:20:58.7692319Z Container is terminating. Grace period: 5 seconds.
+2026-04-18T18:20:58.7993431Z Stop and delete container. Retry count = 0
+2026-04-18T18:20:58.8004668Z Stopping container: 7353c300cab5_cwaya-ai-share.
+2026-04-18T18:20:58.9584503Z Deleting container: 7353c300cab5_cwaya-ai-share. Retry count = 0
+2026-04-18T18:21:07.4803470Z Container spec TerminationMessagePolicy  path 
+2026-04-18T18:21:07.4901752Z Container is terminated. Total time elapsed: 8712 ms.
+2026-04-18T18:21:07.4927000Z Site container: cwaya-ai-share terminated during site startup.
+2026-04-18T18:21:07.5013195Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 17:51:25, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T18:21:07.7539542Z Site startup probe failed after 170.4602871 seconds.
+2026-04-18T18:21:08.1849393Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T18:21:08.2142142Z Failed to start site. Revert by stopping site.
+2026-04-18T18:21:08.2265156Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T18:21:08.2356292Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T18:21:08.2356859Z Site: cwaya-ai-share stopped.
+2026-04-18T18:21:08.2736695Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T18:21:08.9390980Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site container: cwaya-ai-share terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-04-18T18:21:09.2802669Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 18:21:09 (UTC), DetailsLevel: ERR
+2026-04-18T18:21:09.7101939Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 18:21:09 (UTC), DetailsLevel: ERR
+2026-04-18T18:28:25.7816139Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 18:21:09 (UTC), DetailsLevel: ERR
+2026-04-18T18:28:27.8118641Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Site stopped at 04/18/2026 18:21:09 (UTC), DetailsLevel: ERR
+2026-04-18T18:28:27.8126642Z Container start method called.
+2026-04-18T18:28:27.8133902Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T18:28:27.8135535Z Establishing network.
+2026-04-18T18:28:27.8231914Z Pulling image: appsvc/python:3.11_20260203.2.tuxprod.
+2026-04-18T18:28:28.1077031Z Container is starting.
+2026-04-18T18:28:28.1159981Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-18T18:28:28.1171568Z Establishing user namespace if not established already.
+2026-04-18T18:28:28.1177500Z Establishing network if not established already.
+2026-04-18T18:28:28.1182607Z Mounting volumes.
+2026-04-18T18:28:28.1467840Z Nested mountpoint 
+2026-04-18T18:28:28.2251935Z Nested mountpoint volatile/logs
+2026-04-18T18:28:28.2833956Z Nested mountpoint 
+2026-04-18T18:28:28.3750906Z Nested mountpoint 
+2026-04-18T18:28:28.4054407Z Nested mountpoint 
+2026-04-18T18:28:28.9080316Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-18T18:28:28.9083346Z Creating container.
+2026-04-18T18:28:28.9256034Z Creating pipes for streaming container io.
+2026-04-18T18:28:28.9265105Z Creating stdout named pipe at /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stdout_9187faf492ff4697925e94fd1f399635.
+2026-04-18T18:28:28.9283059Z Successfully created stdout named pipe at: /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stdout_9187faf492ff4697925e94fd1f399635.
+2026-04-18T18:28:28.9358022Z Opening named pipe /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stdout_9187faf492ff4697925e94fd1f399635 for reading in non-blocking mode.
+2026-04-18T18:28:28.9364501Z Successfully opened named pipe: /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stdout_9187faf492ff4697925e94fd1f399635.
+2026-04-18T18:28:28.9366185Z Successfully removed non-blocking flag from /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stdout_9187faf492ff4697925e94fd1f399635.
+2026-04-18T18:28:28.9368624Z Creating stderr named pipe at /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stderr_6cce51e33619423f91147e8d4d5b8c20.
+2026-04-18T18:28:28.9371223Z Successfully created stderr named pipe at: /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stderr_6cce51e33619423f91147e8d4d5b8c20.
+2026-04-18T18:28:28.9377944Z Opening named pipe /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stderr_6cce51e33619423f91147e8d4d5b8c20 for reading in non-blocking mode.
+2026-04-18T18:28:28.9382600Z Successfully opened named pipe: /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stderr_6cce51e33619423f91147e8d4d5b8c20.
+2026-04-18T18:28:28.9557896Z Successfully removed non-blocking flag from /podr/container/pipe/2e770f764dd9_cwaya-ai-share/stderr_6cce51e33619423f91147e8d4d5b8c20.
+2026-04-18T18:28:28.9658273Z Creating container with image: appsvc/python:3.11_20260203.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/python:3.11_20260203.2.tuxprod
+2026-04-18T18:28:30.8786606Z Starting container: 2e770f764dd9_cwaya-ai-share.
+2026-04-18T18:28:30.9987455Z Starting watchers and probes.
+2026-04-18T18:28:31.0078219Z Starting metrics collection.
+2026-04-18T18:28:31.0090833Z Container is running.
+2026-04-18T18:28:31.0092480Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T18:28:31.3186737Z Container start method finished after 3458 ms.
+2026-04-18T18:28:31.3505790Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-18T18:28:31.3506240Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 04/18/2026 18:21:08, LastErrorDetails: Container did not start within expected time limit of 1800s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO

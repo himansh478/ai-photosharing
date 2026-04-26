@@ -1,0 +1,87 @@
+# ═══════════════════════════════════════════
+# .dockerignore — Build Context Optimizer
+# Ye file Docker ko batati hai ki kya COPY na kare
+# Chhota build context = faster upload to HF
+# ═══════════════════════════════════════════
+
+# Python cache & compiled files (zaroorat nahi)
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# C extensions (already compiled in builder stage)
+*.so
+
+# Virtual environments (CRITICAL — ye sab local hai, container mein nahi chahiye)
+venv/
+venv.bak/
+.venv/
+env/
+ENV/
+backend/venv/
+
+# Build artifacts
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environment & secrets (HF Spaces pe secrets tab set karo)
+.env
+*.env
+.env.*
+
+# Database & Local Storage (runtime pe generate hote hain)
+backend/database/photo_sharing.db
+*.db
+*.sqlite3
+models_cache/
+storage/temp/
+storage/photos/
+storage/thumbnails/
+
+# Test files (production mein nahi chahiye)
+backend/test_*.py
+backend/*_debug*.py
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker files khud (context mein nahi chahiye)
+Dockerfile
+.dockerignore
+
+# Logs
+*.log
+logs/
+
+# Upload scripts (sirf local use ke liye)
+huggingface_upload.py
+backend/huggingface_upload.py
+backend/hf_deploy_full.py
+backend/hf_cleanup.py

@@ -1,0 +1,23 @@
+flask==2.3.3
+flask-cors==4.0.0
+gunicorn==21.2.0
+insightface==0.7.3
+
+# onnxruntime — Dockerfile ke saath match karo (1.16.3), downgrade na ho
+onnxruntime>=1.17.0
+
+# OpenCV — headless version (GUI components skip, smaller size)
+opencv-python-headless==4.8.0.74
+
+# Core scientific stack — pinned for reproducibility
+Pillow>=9.5.0,<11.0.0
+numpy>=1.23.5,<2.0
+scipy>=1.11.2,<2.0
+
+# Server & utilities
+python-dotenv==1.0.0
+waitress==2.1.2
+psycopg2-binary==2.9.9
+requests==2.31.0
+Cython>=0.29.0
+huggingface_hub>=0.19.0

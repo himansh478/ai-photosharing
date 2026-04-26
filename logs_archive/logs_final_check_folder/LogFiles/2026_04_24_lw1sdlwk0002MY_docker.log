@@ -1,0 +1,815 @@
+2026-04-24T18:14:45.2437743Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:14:49.9858726Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:15:11.7470556Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:15:11.7476589Z Container start method called.
+2026-04-24T18:15:11.7548223Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:15:11.7550336Z Establishing network.
+2026-04-24T18:15:11.7551545Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T18:15:16.4100750Z Image cwayaacr.azurecr.io/ai-photo-sharing:latest is pulled from registry cwayaacr.azurecr.io
+2026-04-24T18:15:16.4183799Z Container is starting.
+2026-04-24T18:15:16.4195044Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:15:16.4201326Z Establishing user namespace if not established already.
+2026-04-24T18:15:16.4275713Z Establishing network if not established already.
+2026-04-24T18:15:16.4278315Z Mounting volumes.
+2026-04-24T18:15:16.4387754Z Nested mountpoint volatile/logs
+2026-04-24T18:15:16.4401719Z Nested mountpoint 
+2026-04-24T18:15:16.6713425Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T18:15:16.6714955Z Creating container.
+2026-04-24T18:15:16.7478192Z Creating pipes for streaming container io.
+2026-04-24T18:15:16.7486318Z Creating stdout named pipe at /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stdout_e9d959a4a2634697894768320e65c40a.
+2026-04-24T18:15:16.7493225Z Successfully created stdout named pipe at: /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stdout_e9d959a4a2634697894768320e65c40a.
+2026-04-24T18:15:16.7494564Z Opening named pipe /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stdout_e9d959a4a2634697894768320e65c40a for reading in non-blocking mode.
+2026-04-24T18:15:16.7495923Z Successfully opened named pipe: /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stdout_e9d959a4a2634697894768320e65c40a.
+2026-04-24T18:15:16.7496925Z Successfully removed non-blocking flag from /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stdout_e9d959a4a2634697894768320e65c40a.
+2026-04-24T18:15:16.7696695Z Creating stderr named pipe at /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stderr_8a000d1966b44b96bda45da5bd847add.
+2026-04-24T18:15:16.7698370Z Successfully created stderr named pipe at: /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stderr_8a000d1966b44b96bda45da5bd847add.
+2026-04-24T18:15:16.7699216Z Opening named pipe /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stderr_8a000d1966b44b96bda45da5bd847add for reading in non-blocking mode.
+2026-04-24T18:15:16.7700123Z Successfully opened named pipe: /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stderr_8a000d1966b44b96bda45da5bd847add.
+2026-04-24T18:15:16.7700792Z Successfully removed non-blocking flag from /podr/container/pipe/fe97de5b9ff8_cwaya-ai-share/stderr_8a000d1966b44b96bda45da5bd847add.
+2026-04-24T18:15:16.8485195Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T18:15:19.1608407Z Starting container: fe97de5b9ff8_cwaya-ai-share.
+2026-04-24T18:15:19.3822606Z Starting watchers and probes.
+2026-04-24T18:15:19.4000594Z Starting metrics collection.
+2026-04-24T18:15:19.4008495Z Container is running.
+2026-04-24T18:15:19.4010152Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:15:19.9731625Z Container start method finished after 8196 ms.
+2026-04-24T18:15:19.9734899Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:15:19.9735431Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T18:16:16.9651779Z Site startup probe succeeded after 56.9209257 seconds.
+2026-04-24T18:16:17.3753033Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 56.9209257 seconds., DetailsLevel: INFO
+2026-04-24T18:16:17.8491852Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T18:16:17.8514924Z Site started.
+2026-04-24T18:16:17.8516870Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 18:16:17 (UTC), DetailsLevel: INFO
+2026-04-24T18:16:37.9393122Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/23/2026 17:34:19 (UTC), DetailsLevel: INFO
+2026-04-24T18:16:37.9599370Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/23/2026 17:34:19 (UTC), DetailsLevel: INFO
+2026-04-24T18:16:37.9601738Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:16:38.0994313Z Stop and delete container. Retry count = 0
+2026-04-24T18:16:38.0996927Z Stopping container: 1190ce7b85e5_cwaya-ai-share.
+2026-04-24T18:16:45.8206179Z Deleting container: 1190ce7b85e5_cwaya-ai-share. Retry count = 0
+2026-04-24T18:16:46.4831181Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:16:46.4843288Z Container is terminated. Total time elapsed: 8522 ms.
+2026-04-24T18:16:46.5016134Z Site: cwaya-ai-share stopped.
+2026-04-24T18:17:09.6776674Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:17:24.0401236Z State: Starting, Action: EstablishingSiteNetworks, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: , DetailsLevel: ERR
+2026-04-24T18:17:24.1312119Z Failed to start site. Revert by stopping site.
+2026-04-24T18:17:24.2120646Z State: Stopping, Action: StoppingSite, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: , DetailsLevel: ERR
+2026-04-24T18:17:24.2308060Z State: Stopping, Action: StoppingSiteContainers, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: , DetailsLevel: ERR
+2026-04-24T18:17:24.2308504Z Site: cwaya-ai-share stopped.
+2026-04-24T18:17:46.6741864Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 18:16:17 (UTC), DetailsLevel: INFO
+2026-04-24T18:17:46.8267815Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 18:16:17 (UTC), DetailsLevel: INFO
+2026-04-24T18:17:46.8350986Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:17:47.3576538Z Stop and delete container. Retry count = 0
+2026-04-24T18:17:47.3680516Z Stopping container: fe97de5b9ff8_cwaya-ai-share.
+2026-04-24T18:17:55.9275814Z Deleting container: fe97de5b9ff8_cwaya-ai-share. Retry count = 0
+2026-04-24T18:17:56.9821483Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:17:56.9993140Z Container is terminated. Total time elapsed: 10147 ms.
+2026-04-24T18:17:57.0020382Z Site: cwaya-ai-share stopped.
+2026-04-24T18:18:20.9091055Z State: Starting, Action: EstablishingSiteNetworks, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Site stopped at 04/24/2026 18:17:25 (UTC), DetailsLevel: ERR
+2026-04-24T18:18:26.3701281Z State: Starting, Action: StartingMsiContainer, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Site stopped at 04/24/2026 18:17:25 (UTC), DetailsLevel: ERR
+2026-04-24T18:18:42.3956954Z State: Starting, Action: StartingSiteContainers, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Site stopped at 04/24/2026 18:17:25 (UTC), DetailsLevel: ERR
+2026-04-24T18:18:42.4052793Z Container start method called.
+2026-04-24T18:18:42.4054145Z State: Starting, Action: PullingImage, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:18:42.4060841Z Establishing network.
+2026-04-24T18:18:42.4062566Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T18:18:43.4707629Z Container is starting.
+2026-04-24T18:18:43.4771373Z State: Starting, Action: MountingVolumes, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:18:43.4778756Z Establishing user namespace if not established already.
+2026-04-24T18:18:43.4792657Z Establishing network if not established already.
+2026-04-24T18:18:43.4793891Z Mounting volumes.
+2026-04-24T18:18:43.4795378Z Nested mountpoint volatile/logs
+2026-04-24T18:18:43.6781357Z Nested mountpoint 
+2026-04-24T18:18:43.7313946Z State: Starting, Action: CreatingContainer, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T18:18:43.7586276Z Creating container.
+2026-04-24T18:18:43.7595457Z Creating pipes for streaming container io.
+2026-04-24T18:18:43.7596489Z Creating stdout named pipe at /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stdout_7318664ac70e4dd1a81323a38a05cf14.
+2026-04-24T18:18:43.7603750Z Successfully created stdout named pipe at: /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stdout_7318664ac70e4dd1a81323a38a05cf14.
+2026-04-24T18:18:43.7604562Z Opening named pipe /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stdout_7318664ac70e4dd1a81323a38a05cf14 for reading in non-blocking mode.
+2026-04-24T18:18:43.7605552Z Successfully opened named pipe: /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stdout_7318664ac70e4dd1a81323a38a05cf14.
+2026-04-24T18:18:43.7606354Z Successfully removed non-blocking flag from /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stdout_7318664ac70e4dd1a81323a38a05cf14.
+2026-04-24T18:18:43.7615103Z Creating stderr named pipe at /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stderr_737321e90ebc426a987b5994c0d745a2.
+2026-04-24T18:18:43.8012524Z Successfully created stderr named pipe at: /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stderr_737321e90ebc426a987b5994c0d745a2.
+2026-04-24T18:18:43.8466212Z Opening named pipe /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stderr_737321e90ebc426a987b5994c0d745a2 for reading in non-blocking mode.
+2026-04-24T18:18:43.8558825Z Successfully opened named pipe: /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stderr_737321e90ebc426a987b5994c0d745a2.
+2026-04-24T18:18:43.8628805Z Successfully removed non-blocking flag from /podr/container/pipe/2c960793d8d8_cwaya-ai-share/stderr_737321e90ebc426a987b5994c0d745a2.
+2026-04-24T18:18:43.8632300Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T18:18:44.6303831Z Starting container: 2c960793d8d8_cwaya-ai-share.
+2026-04-24T18:18:44.7897283Z Starting watchers and probes.
+2026-04-24T18:18:44.7919084Z Starting metrics collection.
+2026-04-24T18:18:44.8005243Z Container is running.
+2026-04-24T18:18:44.8008140Z State: Starting, Action: CreatingContainer, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:18:44.9908508Z Container start method finished after 2585 ms.
+2026-04-24T18:18:44.9910403Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:18:44.9910632Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T18:19:32.3837947Z Site startup probe succeeded after 47.3531555 seconds.
+2026-04-24T18:19:32.8948561Z State: Starting, Action: WarmUpProbeSucceeded, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Site startup probe succeeded after 47.3531555 seconds., DetailsLevel: INFO
+2026-04-24T18:19:34.0415256Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T18:19:34.0423510Z Site started.
+2026-04-24T18:19:34.0424569Z State: Started, Action: None, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Site started at 04/24/2026 18:19:34 (UTC), DetailsLevel: INFO
+2026-04-24T18:20:34.9959049Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:20:43.0935650Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:20:46.4446071Z Site container: cwaya-ai-share_managedIdentity terminated during site startup.
+2026-04-24T18:20:46.4825229Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:20:46.5937063Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:20:46.9579296Z Site container: cwaya-ai-share_managedIdentity terminated. Stopping the entire site.
+2026-04-24T18:20:47.1223376Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:20:47.1421868Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:20:47.1422525Z Site: cwaya-ai-share stopped.
+2026-04-24T18:21:07.3803160Z State: Stopping, Action: StoppingSite, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Site started at 04/24/2026 18:19:34 (UTC), DetailsLevel: INFO
+2026-04-24T18:21:07.4157779Z State: Stopping, Action: StoppingSiteContainers, LastError: VNETFailure, LastErrorTimestamp: 04/24/2026 18:17:24, LastErrorDetails: There was an issue setting up VNet., Details: Site started at 04/24/2026 18:19:34 (UTC), DetailsLevel: INFO
+2026-04-24T18:21:07.4258024Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:21:07.8477955Z Stop and delete container. Retry count = 0
+2026-04-24T18:21:07.8498053Z Stopping container: 2c960793d8d8_cwaya-ai-share.
+2026-04-24T18:21:15.6867775Z Deleting container: 2c960793d8d8_cwaya-ai-share. Retry count = 0
+2026-04-24T18:21:16.4207211Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:21:16.4235633Z Container is terminated. Total time elapsed: 8987 ms.
+2026-04-24T18:21:16.4332591Z Site: cwaya-ai-share stopped.
+2026-04-24T18:21:46.6684511Z State: Starting, Action: EstablishingSiteNetworks, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:20:48 (UTC), DetailsLevel: WARN
+2026-04-24T18:21:49.7066777Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:20:48 (UTC), DetailsLevel: WARN
+2026-04-24T18:22:00.8111083Z State: Starting, Action: StartingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:20:48 (UTC), DetailsLevel: WARN
+2026-04-24T18:22:00.8118705Z Container start method called.
+2026-04-24T18:22:00.8134337Z State: Starting, Action: PullingImage, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:22:00.8142697Z Establishing network.
+2026-04-24T18:22:00.8215763Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T18:22:01.8554135Z Container is starting.
+2026-04-24T18:22:01.8558830Z State: Starting, Action: MountingVolumes, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:22:01.8563647Z Establishing user namespace if not established already.
+2026-04-24T18:22:01.8565065Z Establishing network if not established already.
+2026-04-24T18:22:01.8566322Z Mounting volumes.
+2026-04-24T18:22:01.8568152Z Nested mountpoint volatile/logs
+2026-04-24T18:22:01.8756352Z Nested mountpoint 
+2026-04-24T18:22:02.1683876Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T18:22:02.1693638Z Creating container.
+2026-04-24T18:22:02.1698202Z Creating pipes for streaming container io.
+2026-04-24T18:22:02.1883804Z Creating stdout named pipe at /podr/container/pipe/97249a231963_cwaya-ai-share/stdout_65d82d18566d4a6787d8605d74536511.
+2026-04-24T18:22:02.1893284Z Successfully created stdout named pipe at: /podr/container/pipe/97249a231963_cwaya-ai-share/stdout_65d82d18566d4a6787d8605d74536511.
+2026-04-24T18:22:02.1894131Z Opening named pipe /podr/container/pipe/97249a231963_cwaya-ai-share/stdout_65d82d18566d4a6787d8605d74536511 for reading in non-blocking mode.
+2026-04-24T18:22:02.1895166Z Successfully opened named pipe: /podr/container/pipe/97249a231963_cwaya-ai-share/stdout_65d82d18566d4a6787d8605d74536511.
+2026-04-24T18:22:02.1895901Z Successfully removed non-blocking flag from /podr/container/pipe/97249a231963_cwaya-ai-share/stdout_65d82d18566d4a6787d8605d74536511.
+2026-04-24T18:22:02.1898712Z Creating stderr named pipe at /podr/container/pipe/97249a231963_cwaya-ai-share/stderr_c330eb5d38b04a268a8d19ac32d72680.
+2026-04-24T18:22:02.2179709Z Successfully created stderr named pipe at: /podr/container/pipe/97249a231963_cwaya-ai-share/stderr_c330eb5d38b04a268a8d19ac32d72680.
+2026-04-24T18:22:02.2183684Z Opening named pipe /podr/container/pipe/97249a231963_cwaya-ai-share/stderr_c330eb5d38b04a268a8d19ac32d72680 for reading in non-blocking mode.
+2026-04-24T18:22:02.2193055Z Successfully opened named pipe: /podr/container/pipe/97249a231963_cwaya-ai-share/stderr_c330eb5d38b04a268a8d19ac32d72680.
+2026-04-24T18:22:02.2195125Z Successfully removed non-blocking flag from /podr/container/pipe/97249a231963_cwaya-ai-share/stderr_c330eb5d38b04a268a8d19ac32d72680.
+2026-04-24T18:22:02.2272258Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T18:22:03.3774876Z Starting container: 97249a231963_cwaya-ai-share.
+2026-04-24T18:22:03.4680781Z Starting watchers and probes.
+2026-04-24T18:22:03.4688462Z Starting metrics collection.
+2026-04-24T18:22:03.4966514Z Container is running.
+2026-04-24T18:22:03.4967999Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:22:03.8501623Z Container start method finished after 3038 ms.
+2026-04-24T18:22:03.8503622Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:22:03.8503834Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T18:22:52.6050916Z Site startup probe succeeded after 48.5169776 seconds.
+2026-04-24T18:22:52.8339588Z State: Starting, Action: WarmUpProbeSucceeded, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Site startup probe succeeded after 48.5169776 seconds., DetailsLevel: INFO
+2026-04-24T18:22:53.5435690Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T18:22:53.5445982Z Site started.
+2026-04-24T18:22:53.5449589Z State: Started, Action: None, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Site started at 04/24/2026 18:22:53 (UTC), DetailsLevel: INFO
+2026-04-24T18:23:25.6203399Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:23:28.6442288Z State: Starting, Action: EstablishingSiteNetworks, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:23:28.6732072Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:23:28.6743646Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:23:28.6745520Z Site: cwaya-ai-share stopped.
+2026-04-24T18:23:49.3661995Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Site started at 04/24/2026 18:22:53 (UTC), DetailsLevel: INFO
+2026-04-24T18:23:49.5077294Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:20:46, LastErrorDetails: , Details: Site started at 04/24/2026 18:22:53 (UTC), DetailsLevel: INFO
+2026-04-24T18:23:49.5093344Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:23:50.0365914Z Stop and delete container. Retry count = 0
+2026-04-24T18:23:50.0451585Z Stopping container: 97249a231963_cwaya-ai-share.
+2026-04-24T18:23:55.4828439Z Deleting container: 97249a231963_cwaya-ai-share. Retry count = 0
+2026-04-24T18:23:56.3478103Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:23:56.3603388Z Container is terminated. Total time elapsed: 6792 ms.
+2026-04-24T18:23:56.3772075Z Site: cwaya-ai-share stopped.
+2026-04-24T18:24:37.8773323Z State: Starting, Action: EstablishingSiteNetworks, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:23:28 (UTC), DetailsLevel: WARN
+2026-04-24T18:24:40.9070199Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:23:28 (UTC), DetailsLevel: WARN
+2026-04-24T18:24:52.2017107Z State: Starting, Action: StartingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:23:28 (UTC), DetailsLevel: WARN
+2026-04-24T18:24:52.2026749Z Container start method called.
+2026-04-24T18:24:52.2031492Z State: Starting, Action: PullingImage, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:24:52.2108145Z Establishing network.
+2026-04-24T18:24:52.2115918Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T18:24:53.0884385Z Container is starting.
+2026-04-24T18:24:53.0887987Z State: Starting, Action: MountingVolumes, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:24:53.0891385Z Establishing user namespace if not established already.
+2026-04-24T18:24:53.0892880Z Establishing network if not established already.
+2026-04-24T18:24:53.0894260Z Mounting volumes.
+2026-04-24T18:24:53.1067421Z Nested mountpoint volatile/logs
+2026-04-24T18:24:53.1185539Z Nested mountpoint 
+2026-04-24T18:24:53.1994048Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T18:24:53.1999330Z Creating container.
+2026-04-24T18:24:53.2504961Z Creating pipes for streaming container io.
+2026-04-24T18:24:53.2691950Z Creating stdout named pipe at /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stdout_0b00d5bb47c2488f929a0a0ed0831dd8.
+2026-04-24T18:24:53.2703651Z Successfully created stdout named pipe at: /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stdout_0b00d5bb47c2488f929a0a0ed0831dd8.
+2026-04-24T18:24:53.2785879Z Opening named pipe /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stdout_0b00d5bb47c2488f929a0a0ed0831dd8 for reading in non-blocking mode.
+2026-04-24T18:24:53.2788027Z Successfully opened named pipe: /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stdout_0b00d5bb47c2488f929a0a0ed0831dd8.
+2026-04-24T18:24:53.2788917Z Successfully removed non-blocking flag from /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stdout_0b00d5bb47c2488f929a0a0ed0831dd8.
+2026-04-24T18:24:53.2790302Z Creating stderr named pipe at /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stderr_fd2972c8b2394bd882cd184aafb2c1c1.
+2026-04-24T18:24:53.2791569Z Successfully created stderr named pipe at: /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stderr_fd2972c8b2394bd882cd184aafb2c1c1.
+2026-04-24T18:24:53.2792347Z Opening named pipe /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stderr_fd2972c8b2394bd882cd184aafb2c1c1 for reading in non-blocking mode.
+2026-04-24T18:24:53.2793205Z Successfully opened named pipe: /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stderr_fd2972c8b2394bd882cd184aafb2c1c1.
+2026-04-24T18:24:53.2793866Z Successfully removed non-blocking flag from /podr/container/pipe/7ea0439e475b_cwaya-ai-share/stderr_fd2972c8b2394bd882cd184aafb2c1c1.
+2026-04-24T18:24:53.2794918Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T18:24:53.9225312Z Starting container: 7ea0439e475b_cwaya-ai-share.
+2026-04-24T18:24:54.0020324Z Starting watchers and probes.
+2026-04-24T18:24:54.0036899Z Starting metrics collection.
+2026-04-24T18:24:54.0109648Z Container is running.
+2026-04-24T18:24:54.0111679Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:24:54.1336352Z Container start method finished after 1930 ms.
+2026-04-24T18:24:54.1841560Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:24:54.1842151Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T18:25:21.3769142Z Site startup probe succeeded after 27.1733669 seconds.
+2026-04-24T18:25:21.5987060Z State: Starting, Action: WarmUpProbeSucceeded, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Site startup probe succeeded after 27.1733669 seconds., DetailsLevel: INFO
+2026-04-24T18:25:22.5932519Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T18:25:22.5938223Z Site started.
+2026-04-24T18:25:22.5939039Z State: Started, Action: None, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Site started at 04/24/2026 18:25:22 (UTC), DetailsLevel: INFO
+2026-04-24T18:25:50.4486773Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:25:54.6975687Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:25:56.0341876Z Site container: cwaya-ai-share_managedIdentity terminated during site startup.
+2026-04-24T18:25:56.0514709Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:25:56.0524857Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:25:56.3328510Z Site container: cwaya-ai-share_managedIdentity terminated. Stopping the entire site.
+2026-04-24T18:25:56.3355561Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:25:56.3534447Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:25:56.3534796Z Site: cwaya-ai-share stopped.
+2026-04-24T18:26:16.4676519Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Site started at 04/24/2026 18:25:22 (UTC), DetailsLevel: INFO
+2026-04-24T18:26:16.5950504Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:23:28, LastErrorDetails: , Details: Site started at 04/24/2026 18:25:22 (UTC), DetailsLevel: INFO
+2026-04-24T18:26:16.6047762Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:26:17.0950364Z Stop and delete container. Retry count = 0
+2026-04-24T18:26:17.1167115Z Stopping container: 7ea0439e475b_cwaya-ai-share.
+2026-04-24T18:26:23.4558764Z Deleting container: 7ea0439e475b_cwaya-ai-share. Retry count = 0
+2026-04-24T18:26:24.0388147Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:26:24.0429970Z Container is terminated. Total time elapsed: 7430 ms.
+2026-04-24T18:26:24.0523590Z Site: cwaya-ai-share stopped.
+2026-04-24T18:27:03.7276757Z State: Starting, Action: EstablishingSiteNetworks, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:25:57 (UTC), DetailsLevel: WARN
+2026-04-24T18:27:07.0537116Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:25:57 (UTC), DetailsLevel: WARN
+2026-04-24T18:27:27.4126880Z State: Starting, Action: StartingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:25:57 (UTC), DetailsLevel: WARN
+2026-04-24T18:27:27.4305010Z Container start method called.
+2026-04-24T18:27:27.4312755Z State: Starting, Action: PullingImage, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:27:27.4314702Z Establishing network.
+2026-04-24T18:27:27.4425190Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T18:27:29.4796962Z Container is starting.
+2026-04-24T18:27:29.4799420Z State: Starting, Action: MountingVolumes, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:27:29.4804514Z Establishing user namespace if not established already.
+2026-04-24T18:27:29.4807401Z Establishing network if not established already.
+2026-04-24T18:27:29.4808768Z Mounting volumes.
+2026-04-24T18:27:29.4818934Z Nested mountpoint volatile/logs
+2026-04-24T18:27:29.5301432Z Nested mountpoint 
+2026-04-24T18:27:29.6926116Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T18:27:29.7020708Z Creating container.
+2026-04-24T18:27:29.7027033Z Creating pipes for streaming container io.
+2026-04-24T18:27:29.7028692Z Creating stdout named pipe at /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stdout_7d6dc325c79b49e7be36dc05ba1bf518.
+2026-04-24T18:27:29.7411580Z Successfully created stdout named pipe at: /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stdout_7d6dc325c79b49e7be36dc05ba1bf518.
+2026-04-24T18:27:29.7413958Z Opening named pipe /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stdout_7d6dc325c79b49e7be36dc05ba1bf518 for reading in non-blocking mode.
+2026-04-24T18:27:29.7415388Z Successfully opened named pipe: /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stdout_7d6dc325c79b49e7be36dc05ba1bf518.
+2026-04-24T18:27:29.7416270Z Successfully removed non-blocking flag from /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stdout_7d6dc325c79b49e7be36dc05ba1bf518.
+2026-04-24T18:27:29.7417716Z Creating stderr named pipe at /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stderr_6c6a5af07ca44d9f9ca51aecaa9d2a00.
+2026-04-24T18:27:29.7419254Z Successfully created stderr named pipe at: /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stderr_6c6a5af07ca44d9f9ca51aecaa9d2a00.
+2026-04-24T18:27:29.7419924Z Opening named pipe /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stderr_6c6a5af07ca44d9f9ca51aecaa9d2a00 for reading in non-blocking mode.
+2026-04-24T18:27:29.7420800Z Successfully opened named pipe: /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stderr_6c6a5af07ca44d9f9ca51aecaa9d2a00.
+2026-04-24T18:27:29.7421615Z Successfully removed non-blocking flag from /podr/container/pipe/bbf7bfe7373c_cwaya-ai-share/stderr_6c6a5af07ca44d9f9ca51aecaa9d2a00.
+2026-04-24T18:27:29.7422609Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T18:27:30.9480581Z Starting container: bbf7bfe7373c_cwaya-ai-share.
+2026-04-24T18:27:31.0601227Z Starting watchers and probes.
+2026-04-24T18:27:31.0676268Z Starting metrics collection.
+2026-04-24T18:27:31.0693479Z Container is running.
+2026-04-24T18:27:31.0695072Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:27:31.3293133Z Container start method finished after 3840 ms.
+2026-04-24T18:27:31.3303892Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:27:31.3304442Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T18:28:06.4749030Z Site startup probe succeeded after 35.1044726 seconds.
+2026-04-24T18:28:06.6662963Z State: Starting, Action: WarmUpProbeSucceeded, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site startup probe succeeded after 35.1044726 seconds., DetailsLevel: INFO
+2026-04-24T18:28:07.2484972Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T18:28:07.2575745Z Site started.
+2026-04-24T18:28:07.2578534Z State: Started, Action: None, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:28:07 (UTC), DetailsLevel: INFO
+2026-04-24T18:35:01.6779530Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:35:07.4664975Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:35:22.3018895Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:35:22.3023865Z Container start method called.
+2026-04-24T18:35:22.3037223Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:35:22.3040321Z Establishing network.
+2026-04-24T18:35:22.3042410Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T18:35:24.2445933Z Container is starting.
+2026-04-24T18:35:24.2461866Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:35:24.2469588Z Establishing user namespace if not established already.
+2026-04-24T18:35:24.2470792Z Establishing network if not established already.
+2026-04-24T18:35:24.2546438Z Mounting volumes.
+2026-04-24T18:35:24.2548816Z Nested mountpoint volatile/logs
+2026-04-24T18:35:24.3152170Z Nested mountpoint 
+2026-04-24T18:35:24.4874407Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T18:35:24.4875925Z Creating container.
+2026-04-24T18:35:24.4877163Z Creating pipes for streaming container io.
+2026-04-24T18:35:24.4878232Z Creating stdout named pipe at /podr/container/pipe/324256afff65_cwaya-ai-share/stdout_4e18e1380efc4b24a6924bb60e719577.
+2026-04-24T18:35:24.5162157Z Successfully created stdout named pipe at: /podr/container/pipe/324256afff65_cwaya-ai-share/stdout_4e18e1380efc4b24a6924bb60e719577.
+2026-04-24T18:35:24.5163940Z Opening named pipe /podr/container/pipe/324256afff65_cwaya-ai-share/stdout_4e18e1380efc4b24a6924bb60e719577 for reading in non-blocking mode.
+2026-04-24T18:35:24.5177627Z Successfully opened named pipe: /podr/container/pipe/324256afff65_cwaya-ai-share/stdout_4e18e1380efc4b24a6924bb60e719577.
+2026-04-24T18:35:24.5179100Z Successfully removed non-blocking flag from /podr/container/pipe/324256afff65_cwaya-ai-share/stdout_4e18e1380efc4b24a6924bb60e719577.
+2026-04-24T18:35:24.5578569Z Creating stderr named pipe at /podr/container/pipe/324256afff65_cwaya-ai-share/stderr_6ff902e3a2e74e93a03bf16a8ea666cf.
+2026-04-24T18:35:24.5584231Z Successfully created stderr named pipe at: /podr/container/pipe/324256afff65_cwaya-ai-share/stderr_6ff902e3a2e74e93a03bf16a8ea666cf.
+2026-04-24T18:35:24.5586002Z Opening named pipe /podr/container/pipe/324256afff65_cwaya-ai-share/stderr_6ff902e3a2e74e93a03bf16a8ea666cf for reading in non-blocking mode.
+2026-04-24T18:35:24.5591835Z Successfully opened named pipe: /podr/container/pipe/324256afff65_cwaya-ai-share/stderr_6ff902e3a2e74e93a03bf16a8ea666cf.
+2026-04-24T18:35:24.5594616Z Successfully removed non-blocking flag from /podr/container/pipe/324256afff65_cwaya-ai-share/stderr_6ff902e3a2e74e93a03bf16a8ea666cf.
+2026-04-24T18:35:24.5785586Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T18:35:26.6309242Z Starting container: 324256afff65_cwaya-ai-share.
+2026-04-24T18:35:26.7712550Z Starting watchers and probes.
+2026-04-24T18:35:26.7724397Z Starting metrics collection.
+2026-04-24T18:35:26.7727729Z Container is running.
+2026-04-24T18:35:26.7817594Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:35:26.8723761Z Container start method finished after 4569 ms.
+2026-04-24T18:35:26.8735687Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:35:26.8809124Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T18:35:56.8815949Z Site startup probe succeeded after 29.8892597 seconds.
+2026-04-24T18:35:57.2729754Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 29.8892597 seconds., DetailsLevel: INFO
+2026-04-24T18:35:59.0117413Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T18:35:59.0312242Z Site started.
+2026-04-24T18:35:59.0407575Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 18:35:59 (UTC), DetailsLevel: INFO
+2026-04-24T18:36:19.3027300Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:28:07 (UTC), DetailsLevel: INFO
+2026-04-24T18:36:19.7644658Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:28:07 (UTC), DetailsLevel: INFO
+2026-04-24T18:36:19.7967896Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:36:20.2575507Z Stop and delete container. Retry count = 0
+2026-04-24T18:36:20.2586270Z Stopping container: bbf7bfe7373c_cwaya-ai-share.
+2026-04-24T18:36:35.8330903Z Stop container failed with unexpected exception. Proceed regardless.
+2026-04-24T18:36:36.1932585Z Deleting container: bbf7bfe7373c_cwaya-ai-share. Retry count = 0
+2026-04-24T18:36:37.3345857Z Delete container failed with unexpected exception.
+2026-04-24T18:36:39.3513550Z Stop and delete container. Retry count = 1
+2026-04-24T18:36:39.3521677Z Stopping container: bbf7bfe7373c_cwaya-ai-share.
+2026-04-24T18:36:39.5335621Z Deleting container: bbf7bfe7373c_cwaya-ai-share. Retry count = 1
+2026-04-24T18:36:41.9890477Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:36:41.9990826Z Container is terminated. Total time elapsed: 22182 ms.
+2026-04-24T18:36:42.0276092Z Site: cwaya-ai-share stopped.
+2026-04-24T18:36:59.6933439Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:37:09.2125948Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:37:46.2993301Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:37:46.3685051Z Container start method called.
+2026-04-24T18:37:46.3883582Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:37:46.3896862Z Establishing network.
+2026-04-24T18:37:46.4096585Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T18:37:59.9526331Z Container is starting.
+2026-04-24T18:37:59.9612836Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:37:59.9615674Z Establishing user namespace if not established already.
+2026-04-24T18:37:59.9617244Z Establishing network if not established already.
+2026-04-24T18:37:59.9619944Z Mounting volumes.
+2026-04-24T18:37:59.9939368Z Nested mountpoint volatile/logs
+2026-04-24T18:38:00.0978407Z Nested mountpoint 
+2026-04-24T18:38:00.3529024Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T18:38:00.3532233Z Creating container.
+2026-04-24T18:38:00.3624995Z Creating pipes for streaming container io.
+2026-04-24T18:38:00.3717977Z Creating stdout named pipe at /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stdout_bd9b0e43f223466383cb4faf6c0d06c4.
+2026-04-24T18:38:00.4308913Z Successfully created stdout named pipe at: /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stdout_bd9b0e43f223466383cb4faf6c0d06c4.
+2026-04-24T18:38:00.4311674Z Opening named pipe /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stdout_bd9b0e43f223466383cb4faf6c0d06c4 for reading in non-blocking mode.
+2026-04-24T18:38:00.4722954Z Successfully opened named pipe: /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stdout_bd9b0e43f223466383cb4faf6c0d06c4.
+2026-04-24T18:38:00.4725791Z Successfully removed non-blocking flag from /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stdout_bd9b0e43f223466383cb4faf6c0d06c4.
+2026-04-24T18:38:00.4818919Z Creating stderr named pipe at /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stderr_75f71054290447d4bb54b64bcf783f4c.
+2026-04-24T18:38:00.4820908Z Successfully created stderr named pipe at: /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stderr_75f71054290447d4bb54b64bcf783f4c.
+2026-04-24T18:38:00.4821811Z Opening named pipe /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stderr_75f71054290447d4bb54b64bcf783f4c for reading in non-blocking mode.
+2026-04-24T18:38:00.4822776Z Successfully opened named pipe: /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stderr_75f71054290447d4bb54b64bcf783f4c.
+2026-04-24T18:38:00.4823479Z Successfully removed non-blocking flag from /podr/container/pipe/2b968b73f5cd_cwaya-ai-share/stderr_75f71054290447d4bb54b64bcf783f4c.
+2026-04-24T18:38:00.4908236Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T18:38:04.7019027Z Starting container: 2b968b73f5cd_cwaya-ai-share.
+2026-04-24T18:38:04.9351125Z Starting watchers and probes.
+2026-04-24T18:38:04.9670380Z Starting metrics collection.
+2026-04-24T18:38:04.9754602Z Container is running.
+2026-04-24T18:38:04.9766779Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:38:05.2055528Z Container start method finished after 18836 ms.
+2026-04-24T18:38:05.2579467Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:38:05.2767652Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T18:38:49.5725470Z Site startup probe succeeded after 44.1103929 seconds.
+2026-04-24T18:38:50.1700624Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 44.1103929 seconds., DetailsLevel: INFO
+2026-04-24T18:38:51.8148427Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T18:38:51.8248523Z Site started.
+2026-04-24T18:38:51.8252770Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 18:38:51 (UTC), DetailsLevel: INFO
+2026-04-24T18:39:12.5255535Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:35:59 (UTC), DetailsLevel: INFO
+2026-04-24T18:39:12.6351397Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:35:59 (UTC), DetailsLevel: INFO
+2026-04-24T18:39:12.6771214Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:39:13.5670292Z Stop and delete container. Retry count = 0
+2026-04-24T18:39:13.6766185Z Stopping container: 324256afff65_cwaya-ai-share.
+2026-04-24T18:39:28.8853295Z Stop container failed with unexpected exception. Proceed regardless.
+2026-04-24T18:39:30.4817122Z Deleting container: 324256afff65_cwaya-ai-share. Retry count = 0
+2026-04-24T18:39:31.4174570Z Delete container failed with unexpected exception.
+2026-04-24T18:39:33.4284131Z Stop and delete container. Retry count = 1
+2026-04-24T18:39:33.4463327Z Stopping container: 324256afff65_cwaya-ai-share.
+2026-04-24T18:39:34.4462861Z Deleting container: 324256afff65_cwaya-ai-share. Retry count = 1
+2026-04-24T18:39:35.8761669Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:39:35.9242789Z Container is terminated. Total time elapsed: 23189 ms.
+2026-04-24T18:39:35.9496926Z Site: cwaya-ai-share stopped.
+2026-04-24T18:39:43.6912094Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:39:49.0061740Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:40:12.2063039Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:40:12.2069867Z Container start method called.
+2026-04-24T18:40:12.2076768Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:40:12.2079074Z Establishing network.
+2026-04-24T18:40:12.2080787Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T18:40:17.7200024Z Image cwayaacr.azurecr.io/ai-photo-sharing:latest is pulled from registry cwayaacr.azurecr.io
+2026-04-24T18:40:17.7295235Z Container is starting.
+2026-04-24T18:40:17.7310528Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T18:40:17.7393840Z Establishing user namespace if not established already.
+2026-04-24T18:40:17.7401625Z Establishing network if not established already.
+2026-04-24T18:40:17.7408295Z Mounting volumes.
+2026-04-24T18:40:17.7486101Z Nested mountpoint volatile/logs
+2026-04-24T18:40:18.1890260Z Nested mountpoint 
+2026-04-24T18:40:18.2626123Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T18:40:18.2635350Z Creating container.
+2026-04-24T18:40:18.2737586Z Creating pipes for streaming container io.
+2026-04-24T18:40:18.2813295Z Creating stdout named pipe at /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stdout_6757b89e0c884f1ab71f3584a0235204.
+2026-04-24T18:40:18.2823766Z Successfully created stdout named pipe at: /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stdout_6757b89e0c884f1ab71f3584a0235204.
+2026-04-24T18:40:18.2828327Z Opening named pipe /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stdout_6757b89e0c884f1ab71f3584a0235204 for reading in non-blocking mode.
+2026-04-24T18:40:18.2909905Z Successfully opened named pipe: /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stdout_6757b89e0c884f1ab71f3584a0235204.
+2026-04-24T18:40:18.2916156Z Successfully removed non-blocking flag from /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stdout_6757b89e0c884f1ab71f3584a0235204.
+2026-04-24T18:40:18.3327862Z Creating stderr named pipe at /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stderr_ae666b101cc744329e780562ae7406bc.
+2026-04-24T18:40:18.3822519Z Successfully created stderr named pipe at: /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stderr_ae666b101cc744329e780562ae7406bc.
+2026-04-24T18:40:18.3912852Z Opening named pipe /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stderr_ae666b101cc744329e780562ae7406bc for reading in non-blocking mode.
+2026-04-24T18:40:18.4016574Z Successfully opened named pipe: /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stderr_ae666b101cc744329e780562ae7406bc.
+2026-04-24T18:40:18.4532674Z Successfully removed non-blocking flag from /podr/container/pipe/270eacc9e80f_cwaya-ai-share/stderr_ae666b101cc744329e780562ae7406bc.
+2026-04-24T18:40:18.5114874Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T18:40:21.0041339Z Starting container: 270eacc9e80f_cwaya-ai-share.
+2026-04-24T18:40:21.1448966Z Starting watchers and probes.
+2026-04-24T18:40:21.1739873Z Starting metrics collection.
+2026-04-24T18:40:21.1751332Z Container is running.
+2026-04-24T18:40:21.2239205Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:40:21.3649998Z Container start method finished after 9157 ms.
+2026-04-24T18:40:21.3651891Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T18:40:21.3739564Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T18:41:30.6497392Z Site startup probe succeeded after 69.1829621 seconds.
+2026-04-24T18:41:31.4761519Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 69.1829621 seconds., DetailsLevel: INFO
+2026-04-24T18:41:33.5204710Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T18:41:33.5491032Z Site started.
+2026-04-24T18:41:33.5506896Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 18:41:33 (UTC), DetailsLevel: INFO
+2026-04-24T18:41:53.8605246Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:38:51 (UTC), DetailsLevel: INFO
+2026-04-24T18:41:53.9089917Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:38:51 (UTC), DetailsLevel: INFO
+2026-04-24T18:41:53.9186826Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:41:54.3692710Z Stop and delete container. Retry count = 0
+2026-04-24T18:41:54.3708976Z Stopping container: 2b968b73f5cd_cwaya-ai-share.
+2026-04-24T18:42:03.8166127Z Deleting container: 2b968b73f5cd_cwaya-ai-share. Retry count = 0
+2026-04-24T18:42:07.1487385Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:42:07.1696603Z Container is terminated. Total time elapsed: 13228 ms.
+2026-04-24T18:42:07.2200482Z Site: cwaya-ai-share stopped.
+2026-04-24T18:58:36.4693973Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:58:40.4207869Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T18:58:47.6097788Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:58:47.8016741Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:58:47.9040384Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T18:58:47.9841227Z Site: cwaya-ai-share stopped.
+2026-04-24T18:59:12.6089924Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:41:33 (UTC), DetailsLevel: INFO
+2026-04-24T18:59:12.6139303Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:25:56, LastErrorDetails: , Details: Site started at 04/24/2026 18:41:33 (UTC), DetailsLevel: INFO
+2026-04-24T18:59:12.6229546Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T18:59:12.6713169Z Stop and delete container. Retry count = 0
+2026-04-24T18:59:12.6722585Z Stopping container: 270eacc9e80f_cwaya-ai-share.
+2026-04-24T18:59:18.0837237Z Deleting container: 270eacc9e80f_cwaya-ai-share. Retry count = 0
+2026-04-24T18:59:18.4639474Z Container spec TerminationMessagePolicy  path 
+2026-04-24T18:59:18.4726600Z Container is terminated. Total time elapsed: 5841 ms.
+2026-04-24T18:59:18.4755207Z Site: cwaya-ai-share stopped.
+2026-04-24T18:59:54.5307591Z State: Starting, Action: EstablishingSiteNetworks, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:58:52 (UTC), DetailsLevel: WARN
+2026-04-24T18:59:57.0034244Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:58:52 (UTC), DetailsLevel: WARN
+2026-04-24T19:00:15.2599777Z State: Starting, Action: StartingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Site stopped at 04/24/2026 18:58:52 (UTC), DetailsLevel: WARN
+2026-04-24T19:00:15.2603958Z Container start method called.
+2026-04-24T19:00:15.2604906Z State: Starting, Action: PullingImage, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:00:15.2610991Z Establishing network.
+2026-04-24T19:00:15.2613941Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T19:00:16.5324387Z Container is starting.
+2026-04-24T19:00:16.5333483Z State: Starting, Action: MountingVolumes, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:00:16.5337030Z Establishing user namespace if not established already.
+2026-04-24T19:00:16.5417510Z Establishing network if not established already.
+2026-04-24T19:00:16.5421284Z Mounting volumes.
+2026-04-24T19:00:16.5424071Z Nested mountpoint volatile/logs
+2026-04-24T19:00:16.5620776Z Nested mountpoint 
+2026-04-24T19:00:16.6701526Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T19:00:16.6703064Z Creating container.
+2026-04-24T19:00:16.6704190Z Creating pipes for streaming container io.
+2026-04-24T19:00:16.6705053Z Creating stdout named pipe at /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stdout_5d3a0cbd83f64dd3bb864a40df50f894.
+2026-04-24T19:00:16.6706974Z Successfully created stdout named pipe at: /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stdout_5d3a0cbd83f64dd3bb864a40df50f894.
+2026-04-24T19:00:16.6707766Z Opening named pipe /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stdout_5d3a0cbd83f64dd3bb864a40df50f894 for reading in non-blocking mode.
+2026-04-24T19:00:16.6708620Z Successfully opened named pipe: /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stdout_5d3a0cbd83f64dd3bb864a40df50f894.
+2026-04-24T19:00:16.6709324Z Successfully removed non-blocking flag from /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stdout_5d3a0cbd83f64dd3bb864a40df50f894.
+2026-04-24T19:00:16.6906335Z Creating stderr named pipe at /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stderr_48f54b97c7ab44798bb2d27ca1b05e71.
+2026-04-24T19:00:16.6910256Z Successfully created stderr named pipe at: /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stderr_48f54b97c7ab44798bb2d27ca1b05e71.
+2026-04-24T19:00:16.6911581Z Opening named pipe /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stderr_48f54b97c7ab44798bb2d27ca1b05e71 for reading in non-blocking mode.
+2026-04-24T19:00:16.6912944Z Successfully opened named pipe: /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stderr_48f54b97c7ab44798bb2d27ca1b05e71.
+2026-04-24T19:00:16.6916261Z Successfully removed non-blocking flag from /podr/container/pipe/5f12d9a762c6_cwaya-ai-share/stderr_48f54b97c7ab44798bb2d27ca1b05e71.
+2026-04-24T19:00:16.6994535Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T19:00:17.4892696Z Starting container: 5f12d9a762c6_cwaya-ai-share.
+2026-04-24T19:00:17.6216824Z Starting watchers and probes.
+2026-04-24T19:00:17.6305423Z Starting metrics collection.
+2026-04-24T19:00:17.6311590Z Container is running.
+2026-04-24T19:00:17.6312638Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:00:17.7732951Z Container start method finished after 2512 ms.
+2026-04-24T19:00:17.7734830Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:00:17.8317185Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T19:00:44.3296218Z Site startup probe succeeded after 26.4575588 seconds.
+2026-04-24T19:00:44.5180202Z State: Starting, Action: WarmUpProbeSucceeded, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Site startup probe succeeded after 26.4575588 seconds., DetailsLevel: INFO
+2026-04-24T19:00:44.9627268Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T19:00:44.9702892Z Site started.
+2026-04-24T19:00:44.9705569Z State: Started, Action: None, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Site started at 04/24/2026 19:00:44 (UTC), DetailsLevel: INFO
+2026-04-24T19:01:11.7499977Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:01:15.9612595Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:01:17.7848850Z Site container: cwaya-ai-share_managedIdentity terminated during site startup.
+2026-04-24T19:01:17.7850378Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:01:17.8744359Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:01:18.0358576Z Site container: cwaya-ai-share_managedIdentity terminated. Stopping the entire site.
+2026-04-24T19:01:18.0360141Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:01:18.0440399Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:01:18.0440645Z Site: cwaya-ai-share stopped.
+2026-04-24T19:01:38.1043007Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Site started at 04/24/2026 19:00:44 (UTC), DetailsLevel: INFO
+2026-04-24T19:01:38.2059298Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 18:58:47, LastErrorDetails: , Details: Site started at 04/24/2026 19:00:44 (UTC), DetailsLevel: INFO
+2026-04-24T19:01:38.2350910Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T19:01:38.5054109Z Stop and delete container. Retry count = 0
+2026-04-24T19:01:38.5063124Z Stopping container: 5f12d9a762c6_cwaya-ai-share.
+2026-04-24T19:01:47.1034840Z Deleting container: 5f12d9a762c6_cwaya-ai-share. Retry count = 0
+2026-04-24T19:01:47.9097048Z Container spec TerminationMessagePolicy  path 
+2026-04-24T19:01:47.9221140Z Container is terminated. Total time elapsed: 9676 ms.
+2026-04-24T19:01:47.9308692Z Site: cwaya-ai-share stopped.
+2026-04-24T19:02:21.7881705Z State: Starting, Action: EstablishingSiteNetworks, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:01:19 (UTC), DetailsLevel: WARN
+2026-04-24T19:02:25.3173014Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:01:19 (UTC), DetailsLevel: WARN
+2026-04-24T19:02:37.3909742Z State: Starting, Action: StartingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:01:19 (UTC), DetailsLevel: WARN
+2026-04-24T19:02:37.3915822Z Container start method called.
+2026-04-24T19:02:37.3918539Z State: Starting, Action: PullingImage, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:02:37.3920173Z Establishing network.
+2026-04-24T19:02:37.3921602Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T19:02:39.0726581Z Container is starting.
+2026-04-24T19:02:39.0731963Z State: Starting, Action: MountingVolumes, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:02:39.0733781Z Establishing user namespace if not established already.
+2026-04-24T19:02:39.0734990Z Establishing network if not established already.
+2026-04-24T19:02:39.0736230Z Mounting volumes.
+2026-04-24T19:02:39.0742573Z Nested mountpoint volatile/logs
+2026-04-24T19:02:39.0841375Z Nested mountpoint 
+2026-04-24T19:02:39.2638641Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T19:02:39.2639694Z Creating container.
+2026-04-24T19:02:39.2640464Z Creating pipes for streaming container io.
+2026-04-24T19:02:39.2641260Z Creating stdout named pipe at /podr/container/pipe/576362de6086_cwaya-ai-share/stdout_0c1cb72b4aaa468193fd292bc534e33e.
+2026-04-24T19:02:39.2840303Z Successfully created stdout named pipe at: /podr/container/pipe/576362de6086_cwaya-ai-share/stdout_0c1cb72b4aaa468193fd292bc534e33e.
+2026-04-24T19:02:39.2841382Z Opening named pipe /podr/container/pipe/576362de6086_cwaya-ai-share/stdout_0c1cb72b4aaa468193fd292bc534e33e for reading in non-blocking mode.
+2026-04-24T19:02:39.2844180Z Successfully opened named pipe: /podr/container/pipe/576362de6086_cwaya-ai-share/stdout_0c1cb72b4aaa468193fd292bc534e33e.
+2026-04-24T19:02:39.2845374Z Successfully removed non-blocking flag from /podr/container/pipe/576362de6086_cwaya-ai-share/stdout_0c1cb72b4aaa468193fd292bc534e33e.
+2026-04-24T19:02:39.2846678Z Creating stderr named pipe at /podr/container/pipe/576362de6086_cwaya-ai-share/stderr_f7a4bf086203403b97e847f8135a7704.
+2026-04-24T19:02:39.2848085Z Successfully created stderr named pipe at: /podr/container/pipe/576362de6086_cwaya-ai-share/stderr_f7a4bf086203403b97e847f8135a7704.
+2026-04-24T19:02:39.2848875Z Opening named pipe /podr/container/pipe/576362de6086_cwaya-ai-share/stderr_f7a4bf086203403b97e847f8135a7704 for reading in non-blocking mode.
+2026-04-24T19:02:39.2849780Z Successfully opened named pipe: /podr/container/pipe/576362de6086_cwaya-ai-share/stderr_f7a4bf086203403b97e847f8135a7704.
+2026-04-24T19:02:39.2850455Z Successfully removed non-blocking flag from /podr/container/pipe/576362de6086_cwaya-ai-share/stderr_f7a4bf086203403b97e847f8135a7704.
+2026-04-24T19:02:39.2851433Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T19:02:40.0884570Z Starting container: 576362de6086_cwaya-ai-share.
+2026-04-24T19:02:40.1720880Z Starting watchers and probes.
+2026-04-24T19:02:40.1831114Z Starting metrics collection.
+2026-04-24T19:02:40.1833755Z Container is running.
+2026-04-24T19:02:40.1835014Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:02:40.2783083Z Container start method finished after 2885 ms.
+2026-04-24T19:02:40.2785838Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:02:40.2873075Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T19:03:05.7839077Z Site startup probe succeeded after 25.4350254 seconds.
+2026-04-24T19:03:05.9246665Z State: Starting, Action: WarmUpProbeSucceeded, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Site startup probe succeeded after 25.4350254 seconds., DetailsLevel: INFO
+2026-04-24T19:03:07.0288654Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T19:03:07.0299650Z Site started.
+2026-04-24T19:03:07.0307599Z State: Started, Action: None, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Site started at 04/24/2026 19:03:07 (UTC), DetailsLevel: INFO
+2026-04-24T19:03:38.1491539Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:03:42.7725765Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:03:47.0026304Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:03:47.1031423Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:03:47.1039585Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:03:47.1039889Z Site: cwaya-ai-share stopped.
+2026-04-24T19:04:11.9223232Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Site started at 04/24/2026 19:03:07 (UTC), DetailsLevel: INFO
+2026-04-24T19:04:11.9279656Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:01:17, LastErrorDetails: , Details: Site started at 04/24/2026 19:03:07 (UTC), DetailsLevel: INFO
+2026-04-24T19:04:11.9347759Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T19:04:13.6980799Z Stop and delete container. Retry count = 0
+2026-04-24T19:04:13.7168317Z Stopping container: 576362de6086_cwaya-ai-share.
+2026-04-24T19:04:19.2910015Z Deleting container: 576362de6086_cwaya-ai-share. Retry count = 0
+2026-04-24T19:04:19.8382167Z Container spec TerminationMessagePolicy  path 
+2026-04-24T19:04:19.8392047Z Container is terminated. Total time elapsed: 7903 ms.
+2026-04-24T19:04:19.8501316Z Site: cwaya-ai-share stopped.
+2026-04-24T19:04:57.8227796Z State: Starting, Action: EstablishingSiteNetworks, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:03:51 (UTC), DetailsLevel: WARN
+2026-04-24T19:05:02.2318715Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:03:51 (UTC), DetailsLevel: WARN
+2026-04-24T19:05:17.0994920Z State: Starting, Action: StartingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:03:51 (UTC), DetailsLevel: WARN
+2026-04-24T19:05:17.1000010Z Container start method called.
+2026-04-24T19:05:17.1008818Z State: Starting, Action: PullingImage, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:05:17.1010422Z Establishing network.
+2026-04-24T19:05:17.1011541Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T19:05:17.8778538Z Container is starting.
+2026-04-24T19:05:17.8780537Z State: Starting, Action: MountingVolumes, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:05:17.8783293Z Establishing user namespace if not established already.
+2026-04-24T19:05:17.8963022Z Establishing network if not established already.
+2026-04-24T19:05:17.8967493Z Mounting volumes.
+2026-04-24T19:05:17.9062113Z Nested mountpoint volatile/logs
+2026-04-24T19:05:17.9277782Z Nested mountpoint 
+2026-04-24T19:05:18.0487914Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T19:05:18.0489089Z Creating container.
+2026-04-24T19:05:18.0489992Z Creating pipes for streaming container io.
+2026-04-24T19:05:18.0490729Z Creating stdout named pipe at /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stdout_6df12dc9f62d4d0bb0a7b8d22eee41d1.
+2026-04-24T19:05:18.0492950Z Successfully created stdout named pipe at: /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stdout_6df12dc9f62d4d0bb0a7b8d22eee41d1.
+2026-04-24T19:05:18.0493770Z Opening named pipe /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stdout_6df12dc9f62d4d0bb0a7b8d22eee41d1 for reading in non-blocking mode.
+2026-04-24T19:05:18.0494651Z Successfully opened named pipe: /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stdout_6df12dc9f62d4d0bb0a7b8d22eee41d1.
+2026-04-24T19:05:18.0495377Z Successfully removed non-blocking flag from /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stdout_6df12dc9f62d4d0bb0a7b8d22eee41d1.
+2026-04-24T19:05:18.0579705Z Creating stderr named pipe at /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stderr_1d932a3afb3941e5ba2436f88baa9b75.
+2026-04-24T19:05:18.0688961Z Successfully created stderr named pipe at: /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stderr_1d932a3afb3941e5ba2436f88baa9b75.
+2026-04-24T19:05:18.0979740Z Opening named pipe /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stderr_1d932a3afb3941e5ba2436f88baa9b75 for reading in non-blocking mode.
+2026-04-24T19:05:18.0981505Z Successfully opened named pipe: /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stderr_1d932a3afb3941e5ba2436f88baa9b75.
+2026-04-24T19:05:18.0982374Z Successfully removed non-blocking flag from /podr/container/pipe/a00ce161f2d5_cwaya-ai-share/stderr_1d932a3afb3941e5ba2436f88baa9b75.
+2026-04-24T19:05:18.0983763Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T19:05:18.7566183Z Starting container: a00ce161f2d5_cwaya-ai-share.
+2026-04-24T19:05:18.8416774Z Starting watchers and probes.
+2026-04-24T19:05:18.8637112Z Starting metrics collection.
+2026-04-24T19:05:18.8649333Z Container is running.
+2026-04-24T19:05:18.8713225Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:05:19.0229277Z Container start method finished after 1922 ms.
+2026-04-24T19:05:19.0235117Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:05:19.0235644Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T19:05:46.0130364Z Site startup probe succeeded after 26.9384938 seconds.
+2026-04-24T19:05:46.3223364Z State: Starting, Action: WarmUpProbeSucceeded, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Site startup probe succeeded after 26.9384938 seconds., DetailsLevel: INFO
+2026-04-24T19:05:46.7649514Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T19:05:46.7659345Z Site started.
+2026-04-24T19:05:46.7735074Z State: Started, Action: None, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Site started at 04/24/2026 19:05:46 (UTC), DetailsLevel: INFO
+2026-04-24T19:07:09.9832353Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:07:16.3811778Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:07:22.1660851Z Site container: cwaya-ai-share_managedIdentity terminated during site startup.
+2026-04-24T19:07:22.1676036Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:07:22.1880560Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:07:22.4764511Z Site container: cwaya-ai-share_managedIdentity terminated. Stopping the entire site.
+2026-04-24T19:07:22.6293960Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:07:22.6569341Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: , DetailsLevel: WARN
+2026-04-24T19:07:22.6679127Z Site: cwaya-ai-share stopped.
+2026-04-24T19:07:42.8944314Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Site started at 04/24/2026 19:05:46 (UTC), DetailsLevel: INFO
+2026-04-24T19:07:42.8970558Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:03:46, LastErrorDetails: , Details: Site started at 04/24/2026 19:05:46 (UTC), DetailsLevel: INFO
+2026-04-24T19:07:42.8975307Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T19:07:42.9464993Z Stop and delete container. Retry count = 0
+2026-04-24T19:07:42.9472908Z Stopping container: a00ce161f2d5_cwaya-ai-share.
+2026-04-24T19:07:48.3067564Z Deleting container: a00ce161f2d5_cwaya-ai-share. Retry count = 0
+2026-04-24T19:07:48.6995910Z Container spec TerminationMessagePolicy  path 
+2026-04-24T19:07:48.7175353Z Container is terminated. Total time elapsed: 5802 ms.
+2026-04-24T19:07:48.7194958Z Site: cwaya-ai-share stopped.
+2026-04-24T19:08:17.8684231Z State: Starting, Action: EstablishingSiteNetworks, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:07:24 (UTC), DetailsLevel: WARN
+2026-04-24T19:08:20.6209873Z State: Starting, Action: StartingMsiContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:07:24 (UTC), DetailsLevel: WARN
+2026-04-24T19:08:34.9083458Z State: Starting, Action: StartingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site stopped at 04/24/2026 19:07:24 (UTC), DetailsLevel: WARN
+2026-04-24T19:08:34.9167117Z Container start method called.
+2026-04-24T19:08:34.9168910Z State: Starting, Action: PullingImage, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:08:34.9170276Z Establishing network.
+2026-04-24T19:08:34.9177610Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T19:08:35.6387967Z Container is starting.
+2026-04-24T19:08:35.6463613Z State: Starting, Action: MountingVolumes, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:08:35.6472962Z Establishing user namespace if not established already.
+2026-04-24T19:08:35.6476912Z Establishing network if not established already.
+2026-04-24T19:08:35.6480567Z Mounting volumes.
+2026-04-24T19:08:35.6493238Z Nested mountpoint volatile/logs
+2026-04-24T19:08:35.6686230Z Nested mountpoint 
+2026-04-24T19:08:35.8241197Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T19:08:35.8417908Z Creating container.
+2026-04-24T19:08:35.8429408Z Creating pipes for streaming container io.
+2026-04-24T19:08:35.8433007Z Creating stdout named pipe at /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stdout_ec011fb0ba34406a87f840615545a5c3.
+2026-04-24T19:08:35.8436336Z Successfully created stdout named pipe at: /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stdout_ec011fb0ba34406a87f840615545a5c3.
+2026-04-24T19:08:35.8437539Z Opening named pipe /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stdout_ec011fb0ba34406a87f840615545a5c3 for reading in non-blocking mode.
+2026-04-24T19:08:35.8440633Z Successfully opened named pipe: /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stdout_ec011fb0ba34406a87f840615545a5c3.
+2026-04-24T19:08:35.8443718Z Successfully removed non-blocking flag from /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stdout_ec011fb0ba34406a87f840615545a5c3.
+2026-04-24T19:08:35.8720848Z Creating stderr named pipe at /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stderr_3977c73a441048adbdfb8d5edf9d01fc.
+2026-04-24T19:08:35.8724594Z Successfully created stderr named pipe at: /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stderr_3977c73a441048adbdfb8d5edf9d01fc.
+2026-04-24T19:08:35.8725816Z Opening named pipe /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stderr_3977c73a441048adbdfb8d5edf9d01fc for reading in non-blocking mode.
+2026-04-24T19:08:35.8727343Z Successfully opened named pipe: /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stderr_3977c73a441048adbdfb8d5edf9d01fc.
+2026-04-24T19:08:35.8728411Z Successfully removed non-blocking flag from /podr/container/pipe/1fc1d78f23c0_cwaya-ai-share/stderr_3977c73a441048adbdfb8d5edf9d01fc.
+2026-04-24T19:08:35.8828694Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T19:08:36.4463041Z Starting container: 1fc1d78f23c0_cwaya-ai-share.
+2026-04-24T19:08:36.5655727Z Starting watchers and probes.
+2026-04-24T19:08:36.5686396Z Starting metrics collection.
+2026-04-24T19:08:36.5760090Z Container is running.
+2026-04-24T19:08:36.5778553Z State: Starting, Action: CreatingContainer, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:08:36.7886487Z Container start method finished after 1871 ms.
+2026-04-24T19:08:36.7896358Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:08:36.8189483Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T19:09:02.5952233Z Site startup probe succeeded after 25.726842 seconds.
+2026-04-24T19:09:02.9673471Z State: Starting, Action: WarmUpProbeSucceeded, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site startup probe succeeded after 25.726842 seconds., DetailsLevel: INFO
+2026-04-24T19:09:03.5499570Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T19:09:03.5598833Z Site started.
+2026-04-24T19:09:03.5614174Z State: Started, Action: None, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site started at 04/24/2026 19:09:03 (UTC), DetailsLevel: INFO
+2026-04-24T19:09:59.5905001Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:10:14.0548087Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:10:40.2619882Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:10:40.2717605Z Container start method called.
+2026-04-24T19:10:40.2822233Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:10:40.2837817Z Establishing network.
+2026-04-24T19:10:40.3009644Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T19:10:43.1927170Z Image cwayaacr.azurecr.io/ai-photo-sharing:latest is pulled from registry cwayaacr.azurecr.io
+2026-04-24T19:10:43.1934102Z Container is starting.
+2026-04-24T19:10:43.1937019Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:10:43.1938531Z Establishing user namespace if not established already.
+2026-04-24T19:10:43.1940363Z Establishing network if not established already.
+2026-04-24T19:10:43.1943565Z Mounting volumes.
+2026-04-24T19:10:43.2144497Z Nested mountpoint volatile/logs
+2026-04-24T19:10:43.2325047Z Nested mountpoint 
+2026-04-24T19:10:43.5057169Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T19:10:43.5132128Z Creating container.
+2026-04-24T19:10:43.5141350Z Creating pipes for streaming container io.
+2026-04-24T19:10:43.5143261Z Creating stdout named pipe at /podr/container/pipe/a67d441f5577_cwaya-ai-share/stdout_c971bbe5b66745c48c41efc4b69b7cd7.
+2026-04-24T19:10:43.5158898Z Successfully created stdout named pipe at: /podr/container/pipe/a67d441f5577_cwaya-ai-share/stdout_c971bbe5b66745c48c41efc4b69b7cd7.
+2026-04-24T19:10:43.5161218Z Opening named pipe /podr/container/pipe/a67d441f5577_cwaya-ai-share/stdout_c971bbe5b66745c48c41efc4b69b7cd7 for reading in non-blocking mode.
+2026-04-24T19:10:43.5237695Z Successfully opened named pipe: /podr/container/pipe/a67d441f5577_cwaya-ai-share/stdout_c971bbe5b66745c48c41efc4b69b7cd7.
+2026-04-24T19:10:43.5239175Z Successfully removed non-blocking flag from /podr/container/pipe/a67d441f5577_cwaya-ai-share/stdout_c971bbe5b66745c48c41efc4b69b7cd7.
+2026-04-24T19:10:43.5249428Z Creating stderr named pipe at /podr/container/pipe/a67d441f5577_cwaya-ai-share/stderr_3be4b935b24a4a23a6fe4dd51ef0c4ee.
+2026-04-24T19:10:43.5251051Z Successfully created stderr named pipe at: /podr/container/pipe/a67d441f5577_cwaya-ai-share/stderr_3be4b935b24a4a23a6fe4dd51ef0c4ee.
+2026-04-24T19:10:43.5251876Z Opening named pipe /podr/container/pipe/a67d441f5577_cwaya-ai-share/stderr_3be4b935b24a4a23a6fe4dd51ef0c4ee for reading in non-blocking mode.
+2026-04-24T19:10:43.5252804Z Successfully opened named pipe: /podr/container/pipe/a67d441f5577_cwaya-ai-share/stderr_3be4b935b24a4a23a6fe4dd51ef0c4ee.
+2026-04-24T19:10:43.5253515Z Successfully removed non-blocking flag from /podr/container/pipe/a67d441f5577_cwaya-ai-share/stderr_3be4b935b24a4a23a6fe4dd51ef0c4ee.
+2026-04-24T19:10:43.5254686Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T19:10:44.5778351Z Starting container: a67d441f5577_cwaya-ai-share.
+2026-04-24T19:10:44.7104718Z Starting watchers and probes.
+2026-04-24T19:10:44.7291914Z Starting metrics collection.
+2026-04-24T19:10:44.7297606Z Container is running.
+2026-04-24T19:10:44.7305544Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:10:44.8813296Z Container start method finished after 4607 ms.
+2026-04-24T19:10:44.9395347Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:10:44.9618461Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T19:11:23.8877633Z Site startup probe succeeded after 38.8706099 seconds.
+2026-04-24T19:11:24.6120152Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 38.8706099 seconds., DetailsLevel: INFO
+2026-04-24T19:11:27.6906118Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T19:11:27.7302257Z Site started.
+2026-04-24T19:11:27.7308724Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 19:11:27 (UTC), DetailsLevel: INFO
+2026-04-24T19:11:48.2490169Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site started at 04/24/2026 19:09:03 (UTC), DetailsLevel: INFO
+2026-04-24T19:11:48.2897009Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site started at 04/24/2026 19:09:03 (UTC), DetailsLevel: INFO
+2026-04-24T19:11:48.3078513Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T19:11:48.7908359Z Stop and delete container. Retry count = 0
+2026-04-24T19:11:48.8211794Z Stopping container: 1fc1d78f23c0_cwaya-ai-share.
+2026-04-24T19:11:55.1031403Z Deleting container: 1fc1d78f23c0_cwaya-ai-share. Retry count = 0
+2026-04-24T19:11:58.9415742Z Container spec TerminationMessagePolicy  path 
+2026-04-24T19:11:58.9530274Z Container is terminated. Total time elapsed: 10642 ms.
+2026-04-24T19:11:59.1836104Z Site: cwaya-ai-share stopped.
+2026-04-24T19:12:38.7942281Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:12:46.4239068Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:13:06.7860404Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:13:06.8039233Z Container start method called.
+2026-04-24T19:13:06.8063379Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:13:06.8338847Z Establishing network.
+2026-04-24T19:13:06.8355049Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T19:13:10.8766355Z Image cwayaacr.azurecr.io/ai-photo-sharing:latest is pulled from registry cwayaacr.azurecr.io
+2026-04-24T19:13:10.8769706Z Container is starting.
+2026-04-24T19:13:10.8777603Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:13:10.8779453Z Establishing user namespace if not established already.
+2026-04-24T19:13:10.8783001Z Establishing network if not established already.
+2026-04-24T19:13:10.8785366Z Mounting volumes.
+2026-04-24T19:13:10.8865161Z Nested mountpoint volatile/logs
+2026-04-24T19:13:10.8889919Z Nested mountpoint 
+2026-04-24T19:13:11.1779576Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T19:13:11.1781688Z Creating container.
+2026-04-24T19:13:11.1782932Z Creating pipes for streaming container io.
+2026-04-24T19:13:11.1783994Z Creating stdout named pipe at /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stdout_158437a7549b4a3880127d9b1add42ba.
+2026-04-24T19:13:11.2091580Z Successfully created stdout named pipe at: /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stdout_158437a7549b4a3880127d9b1add42ba.
+2026-04-24T19:13:11.2166947Z Opening named pipe /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stdout_158437a7549b4a3880127d9b1add42ba for reading in non-blocking mode.
+2026-04-24T19:13:11.2169320Z Successfully opened named pipe: /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stdout_158437a7549b4a3880127d9b1add42ba.
+2026-04-24T19:13:11.2170466Z Successfully removed non-blocking flag from /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stdout_158437a7549b4a3880127d9b1add42ba.
+2026-04-24T19:13:11.2287606Z Creating stderr named pipe at /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stderr_8c31a0d3df434c6896fdd5a35c1736ae.
+2026-04-24T19:13:11.2293876Z Successfully created stderr named pipe at: /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stderr_8c31a0d3df434c6896fdd5a35c1736ae.
+2026-04-24T19:13:11.2295416Z Opening named pipe /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stderr_8c31a0d3df434c6896fdd5a35c1736ae for reading in non-blocking mode.
+2026-04-24T19:13:11.2468836Z Successfully opened named pipe: /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stderr_8c31a0d3df434c6896fdd5a35c1736ae.
+2026-04-24T19:13:11.2470893Z Successfully removed non-blocking flag from /podr/container/pipe/7f555ef4db55_cwaya-ai-share/stderr_8c31a0d3df434c6896fdd5a35c1736ae.
+2026-04-24T19:13:11.2485421Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T19:13:12.5434017Z Starting container: 7f555ef4db55_cwaya-ai-share.
+2026-04-24T19:13:12.7048156Z Starting watchers and probes.
+2026-04-24T19:13:12.7354553Z Starting metrics collection.
+2026-04-24T19:13:12.7646039Z Container is running.
+2026-04-24T19:13:12.7658434Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:13:12.8761067Z Container start method finished after 6072 ms.
+2026-04-24T19:13:12.8940209Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:13:12.9442540Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T19:14:27.7720172Z Site startup probe succeeded after 74.7721149 seconds.
+2026-04-24T19:14:28.1231614Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 74.7721149 seconds., DetailsLevel: INFO
+2026-04-24T19:14:29.6027558Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T19:14:29.6129811Z Site started.
+2026-04-24T19:14:29.6145320Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 19:14:29 (UTC), DetailsLevel: INFO
+2026-04-24T19:14:50.1447546Z State: Stopping, Action: StoppingSite, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site started at 04/24/2026 19:11:27 (UTC), DetailsLevel: INFO
+2026-04-24T19:14:50.2240486Z State: Stopping, Action: StoppingSiteContainers, LastError: SiteStartupCancelled, LastErrorTimestamp: 04/24/2026 19:07:22, LastErrorDetails: , Details: Site started at 04/24/2026 19:11:27 (UTC), DetailsLevel: INFO
+2026-04-24T19:14:50.3853581Z Container is terminating. Grace period: 5 seconds.
+2026-04-24T19:14:51.0480908Z Stop and delete container. Retry count = 0
+2026-04-24T19:14:51.0492777Z Stopping container: a67d441f5577_cwaya-ai-share.
+2026-04-24T19:14:58.1512539Z Deleting container: a67d441f5577_cwaya-ai-share. Retry count = 0
+2026-04-24T19:14:59.1061912Z Container spec TerminationMessagePolicy  path 
+2026-04-24T19:14:59.1153991Z Container is terminated. Total time elapsed: 8691 ms.
+2026-04-24T19:14:59.1239719Z Site: cwaya-ai-share stopped.
+2026-04-24T19:26:07.2366825Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:26:13.1354227Z State: Starting, Action: StartingMsiContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:26:38.0026215Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-04-24T19:26:38.0095771Z Container start method called.
+2026-04-24T19:26:38.0115496Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image cwayaacr.azurecr.io/ai-photo-sharing:latest for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:26:38.0117878Z Establishing network.
+2026-04-24T19:26:38.0119411Z Pulling image: cwayaacr.azurecr.io/ai-photo-sharing:latest.
+2026-04-24T19:26:42.6620333Z Image cwayaacr.azurecr.io/ai-photo-sharing:latest is pulled from registry cwayaacr.azurecr.io
+2026-04-24T19:26:42.6623214Z Container is starting.
+2026-04-24T19:26:42.6626056Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for cwaya-ai-share., DetailsLevel: INFO
+2026-04-24T19:26:42.6627624Z Establishing user namespace if not established already.
+2026-04-24T19:26:42.6629007Z Establishing network if not established already.
+2026-04-24T19:26:42.6630314Z Mounting volumes.
+2026-04-24T19:26:42.6631970Z Nested mountpoint volatile/logs
+2026-04-24T19:26:42.8436903Z Nested mountpoint 
+2026-04-24T19:26:42.9349660Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for cwaya-ai-share. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-04-24T19:26:42.9419605Z Creating container.
+2026-04-24T19:26:42.9421227Z Creating pipes for streaming container io.
+2026-04-24T19:26:42.9422345Z Creating stdout named pipe at /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stdout_333e59eb2bee4e0397dd9ea5622582bd.
+2026-04-24T19:26:42.9536467Z Successfully created stdout named pipe at: /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stdout_333e59eb2bee4e0397dd9ea5622582bd.
+2026-04-24T19:26:42.9624424Z Opening named pipe /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stdout_333e59eb2bee4e0397dd9ea5622582bd for reading in non-blocking mode.
+2026-04-24T19:26:42.9628160Z Successfully opened named pipe: /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stdout_333e59eb2bee4e0397dd9ea5622582bd.
+2026-04-24T19:26:42.9629399Z Successfully removed non-blocking flag from /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stdout_333e59eb2bee4e0397dd9ea5622582bd.
+2026-04-24T19:26:42.9633503Z Creating stderr named pipe at /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stderr_ac6925504a2240e9a98aa004b97b5bf1.
+2026-04-24T19:26:42.9638451Z Successfully created stderr named pipe at: /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stderr_ac6925504a2240e9a98aa004b97b5bf1.
+2026-04-24T19:26:42.9639675Z Opening named pipe /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stderr_ac6925504a2240e9a98aa004b97b5bf1 for reading in non-blocking mode.
+2026-04-24T19:26:42.9640928Z Successfully opened named pipe: /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stderr_ac6925504a2240e9a98aa004b97b5bf1.
+2026-04-24T19:26:42.9643055Z Successfully removed non-blocking flag from /podr/container/pipe/3525e189d5ca_cwaya-ai-share/stderr_ac6925504a2240e9a98aa004b97b5bf1.
+2026-04-24T19:26:43.0934857Z Creating container with image: cwayaacr.azurecr.io/ai-photo-sharing:latest from registry: cwayaacr.azurecr.io and fully qualified image name: cwayaacr.azurecr.io/ai-photo-sharing:latest
+2026-04-24T19:26:44.6487417Z Starting container: 3525e189d5ca_cwaya-ai-share.
+2026-04-24T19:26:44.8970602Z Starting watchers and probes.
+2026-04-24T19:26:44.8991414Z Starting metrics collection.
+2026-04-24T19:26:44.8993820Z Container is running.
+2026-04-24T19:26:44.9084916Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:26:45.1256930Z Container start method finished after 7115 ms.
+2026-04-24T19:26:45.1259745Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container cwaya-ai-share successfully created and is running., DetailsLevel: INFO
+2026-04-24T19:26:45.2072975Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-04-24T19:28:03.9532829Z Site startup probe succeeded after 78.7155038 seconds.
+2026-04-24T19:28:04.6924915Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 78.7155038 seconds., DetailsLevel: INFO
+2026-04-24T19:28:06.5105478Z Site is running with deployment version: 93ce36db-14a3-4375-8003-7ae5e207fecf
+2026-04-24T19:28:06.5291899Z Site started.
+2026-04-24T19:28:06.5303906Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 04/24/2026 19:28:06 (UTC), DetailsLevel: INFO
