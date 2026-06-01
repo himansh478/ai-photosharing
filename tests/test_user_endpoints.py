@@ -33,7 +33,7 @@ class DummyConn:
 def test_verify_code_valid(monkeypatch):
     # Return a single photographer row for any query
     dummy = DummyConn([{'id': 'pid1', 'event_name': 'E', 'name': 'Photog', 'total_photos': 10}])
-    monkeypatch.setattr('backend.api.user.get_db_conn', lambda: dummy)
+    monkeypatch.setattr('backend.database.db.get_db_conn', lambda: dummy)
 
     client = flask_app.test_client()
     resp = client.post('/api/user/verify-code', json={'code': 'EVT-TEST-123'})
@@ -46,7 +46,7 @@ def test_verify_code_valid(monkeypatch):
 def test_verify_code_invalid(monkeypatch):
     # Return no rows to simulate invalid code
     dummy = DummyConn([])
-    monkeypatch.setattr('backend.api.user.get_db_conn', lambda: dummy)
+    monkeypatch.setattr('backend.database.db.get_db_conn', lambda: dummy)
 
     client = flask_app.test_client()
     resp = client.post('/api/user/verify-code', json={'code': 'EVT-INVALID'})
