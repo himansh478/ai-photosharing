@@ -34,11 +34,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run failing test (debug)
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest -q
+          pytest -q -k test_verify_code_valid -s
+        # Temporary: run only failing test with -s for debug; revert after fix
         # If tests fail the job will stop here and image will not be built
 
       - name: Build and Push Image (ACR)
