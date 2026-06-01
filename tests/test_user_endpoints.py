@@ -1,5 +1,4 @@
 import pytest
-from backend.app import app as flask_app
 
 
 class DummyCursor:
@@ -35,6 +34,7 @@ def test_verify_code_valid(monkeypatch):
     dummy = DummyConn([{'id': 'pid1', 'event_name': 'E', 'name': 'Photog', 'total_photos': 10}])
     monkeypatch.setattr('backend.database.db.get_db_conn', lambda: dummy)
 
+    from backend.app import app as flask_app
     client = flask_app.test_client()
     resp = client.post('/api/user/verify-code', json={'code': 'EVT-TEST-123'})
     assert resp.status_code == 200
@@ -48,6 +48,7 @@ def test_verify_code_invalid(monkeypatch):
     dummy = DummyConn([])
     monkeypatch.setattr('backend.database.db.get_db_conn', lambda: dummy)
 
+    from backend.app import app as flask_app
     client = flask_app.test_client()
     resp = client.post('/api/user/verify-code', json={'code': 'EVT-INVALID'})
     assert resp.status_code == 400
