@@ -170,20 +170,24 @@ def db_test():
 
 # --- Initialization (Run on startup/import) ---
 def startup_init():
-    try:
-        logger.info("Initializing connection pool...")
-        init_pool()
-        logger.info("Connection pool ready.")
-    except Exception as e:
-        logger.error(f"Connection pool init failed: {e}")
+    # Skip DB and heavy engine initialization during tests to allow fast unit tests
+    if not Config.TESTING:
+        try:
+            logger.info("Initializing connection pool...")
+            init_pool()
+            logger.info("Connection pool ready.")
+        except Exception as e:
+            logger.error(f"Connection pool init failed: {e}")
 
-    try:
-        logger.info("Initializing database tables...")
-        init_db()
-    except Exception as e:
-        logger.error(f"Database initialization failed: {e}")
+        try:
+            logger.info("Initializing database tables...")
+            init_db()
+        except Exception as e:
+            logger.error(f"Database initialization failed: {e}")
 
-    logger.info("Starting face recognition engine in background thread...")
+    # Start face engine in background only when not testing
+    if not Config.TESTING:
+        logger.info("Starting face recognition engine in background thread...")
     def _load_engine_bg():
         try:
             get_engine(Config.INSIGHTFACE_DIR)
@@ -191,8 +195,8 @@ def startup_init():
         except Exception as e:
             logger.error(f"Face engine failed to load: {e}")
 
-    bg_thread = threading.Thread(target=_load_engine_bg, daemon=True)
-    bg_thread.start()
+        bg_thread = threading.Thread(target=_load_engine_bg, daemon=True)
+        bg_thread.start()
 
 # Execute startup
 startup_init()
