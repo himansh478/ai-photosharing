@@ -141,28 +141,38 @@ def upload_selfie():
 def download_photo(photo_id):
     session_id = request.args.get('session_id', '')
 
+    if not session_id:
+        return jsonify({'error': 'session_id is required'}), 401
+
     with get_db_conn() as conn:
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         cursor.execute("SELECT * FROM photos WHERE id=%s", (photo_id,))
         photo = cursor.fetchone()
+        if photo:
+            cursor.execute("SELECT * FROM user_sessions WHERE id=%s", (session_id,))
+            session = cursor.fetchone()
+        else:
+            session = None
         cursor.close()
 
     if not photo:
         return jsonify({'error': 'Photo not found'}), 404
 
+    if not session or session.get('photographer_id') != photo.get('photographer_id'):
+        return jsonify({'error': 'Invalid session for this photo'}), 401
+
     # Log download
-    if session_id:
-        try:
-            with get_db_conn() as conn:
-                cursor = conn.cursor()
-                cursor.execute(
-                    "INSERT INTO download_logs (id, session_id, photo_id) VALUES (%s,%s,%s)",
-                    (str(uuid.uuid4()), session_id, photo_id)
-                )
-                conn.commit()
-                cursor.close()
-        except Exception:
-            pass
+    try:
+        with get_db_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "INSERT INTO download_logs (id, session_id, photo_id) VALUES (%s,%s,%s)",
+                (str(uuid.uuid4()), session_id, photo_id)
+            )
+            conn.commit()
+            cursor.close()
+    except Exception:
+        pass
 
     # Redirect to cloud URL instead of serving file locally
     return redirect(photo['file_path'])
