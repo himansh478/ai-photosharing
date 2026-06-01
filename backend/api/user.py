@@ -12,6 +12,7 @@ from models.face_engine import get_engine
 from services.upload_service import UploadService
 from services.matching_service import MatchingService
 from psycopg2.extras import RealDictCursor
+from extensions import limiter
 
 user_bp = Blueprint('user', __name__)
 logger = logging.getLogger(__name__)
@@ -20,6 +21,7 @@ matching_service = MatchingService()
 
 
 @user_bp.route('/api/user/verify-code', methods=['POST'])
+@limiter.limit("5 per minute")
 def verify_code():
     code = (request.get_json(silent=True) or {}).get('code', '').strip().upper()
     if not code:
@@ -69,7 +71,6 @@ def verify_code():
         'total_photos': p['total_photos']
     })
 
-
 @user_bp.route('/api/user/upload-selfie', methods=['POST'])
 def upload_selfie():
     code = request.form.get('code', '').strip().upper()
@@ -118,6 +119,7 @@ def upload_selfie():
         cursor = conn.cursor()
         cursor.execute(
             "INSERT INTO user_sessions (id, photographer_id, selfie_path, matched_count) VALUES (%s,%s,%s,%s)",
+            # Existing code...
             (session_id, photographer_id, cloud_selfie_url, len(matches))
         )
         conn.commit()

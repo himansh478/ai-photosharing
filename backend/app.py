@@ -9,6 +9,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from flask import Flask, send_from_directory, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
+from extensions import limiter
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 # Load environment variables from .env
 load_dotenv()
@@ -28,6 +31,26 @@ logger = logging.getLogger(__name__)
 # --- Create Flask App ---
 STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static')
 app = Flask(__name__, static_folder=STATIC_DIR, static_url_path='/static')
+
+# Initialize Sentry if DSN provided
+if os.environ.get('SENTRY_DSN'):
+    try:
+        sentry_sdk.init(
+            dsn=os.environ.get('SENTRY_DSN'),
+            integrations=[FlaskIntegration()],
+            traces_sample_rate=0.05,
+            environment=os.environ.get('ENVIRONMENT', 'production')
+        )
+        logger.info('Sentry initialized')
+    except Exception as e:
+        logger.warning(f'Failed to initialize Sentry: {e}')
+
+# Bind the shared rate limiter to the Flask app
+try:
+    limiter.init_app(app)
+    logger.info('Rate limiter initialized')
+except Exception as e:
+    logger.warning(f'Failed to initialize rate limiter: {e}')
 
 # 🛡️ SECURITY UPGRADE 1: Strict CORS
 # Ab koi aur domain postman ya apne server se API nahi chura sakta

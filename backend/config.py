@@ -34,6 +34,10 @@ class Config:
 
     # InsightFace model cache dir
     INSIGHTFACE_DIR = os.path.join(ROOT_DIR, 'models_cache')
+    # Admin secret for protected admin endpoints (override in production env)
+    ADMIN_SECRET = os.environ.get('ADMIN_SECRET', 'change_me_local_admin_secret')
+    # Retention policy in days (default 90)
+    RETENTION_DAYS = int(os.environ.get('RETENTION_DAYS', '90'))
 
 
 # Create directories on import
