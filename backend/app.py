@@ -132,6 +132,20 @@ def photographer_page():
 def user_page():
     return send_from_directory(os.path.join(STATIC_DIR, 'user'), 'index.html')
 
+@app.route('/api/download-presentation')
+def download_presentation():
+    try:
+        root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        ppt_path = os.path.join(root_dir, 'AI_Photo_Sharing_Presentation.pptx')
+        if not os.path.exists(ppt_path):
+            logger.info("Presentation file missing. Generating on the fly...")
+            import subprocess
+            subprocess.run([sys.executable, os.path.join(root_dir, 'generate_ppt.py')], check=True)
+        return send_from_directory(root_dir, 'AI_Photo_Sharing_Presentation.pptx', as_attachment=True)
+    except Exception as e:
+        logger.error(f"Failed to serve presentation: {e}")
+        return jsonify({"error": "Failed to download presentation", "details": str(e)}), 500
+
 @app.route('/api/health')
 def health():
     engine = get_engine()

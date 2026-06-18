@@ -152,16 +152,10 @@
         /* ─── CTA Cards ─── */
         .cta-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            max-width: 700px;
+            max-width: 1000px;
             width: 100%;
-        }
-
-        @media (max-width: 540px) {
-            .cta-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         .cta-card {
@@ -205,6 +199,11 @@
             box-shadow: 0 20px 60px rgba(255, 101, 132, 0.2);
         }
 
+        .cta-card.presentation:hover {
+            border-color: #A78BFA;
+            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.2);
+        }
+
         .card-icon {
             font-size: 2.5rem;
         }
@@ -232,6 +231,10 @@
 
         .cta-card.accent .card-arrow {
             color: var(--accent);
+        }
+
+        .cta-card.presentation .card-arrow {
+            color: #A78BFA;
         }
 
         /* ─── Features ─── */
@@ -321,9 +324,15 @@
             <a href="/user" class="cta-card accent">
                 <div class="card-icon">🔍</div>
                 <div class="card-title">Find My Photos</div>
-                <div class="card-desc">Enter your event code and upload a selfie. We'll find every photo you're in.
-                </div>
+                <div class="card-desc">Enter your event code and upload a selfie. We'll find every photo you're in.</div>
                 <div class="card-arrow">Search Now →</div>
+            </a>
+
+            <a href="/api/download-presentation" class="cta-card presentation" download>
+                <div class="card-icon">📊</div>
+                <div class="card-title">Project Presentation</div>
+                <div class="card-desc">Download the technical PPTX deck containing system architecture, database schema, and AI pipelines.</div>
+                <div class="card-arrow">Download PPTX →</div>
             </a>
         </div>
     </section>
