@@ -14,6 +14,10 @@ Pillow>=9.5.0,<11.0.0
 numpy>=1.23.5,<2.0
 scipy>=1.11.2,<2.0
 
+# Rate limiting & monitoring
+flask-limiter>=3.5.0
+sentry-sdk[flask]>=1.40.0
+
 # Server & utilities
 python-dotenv==1.0.0
 waitress==2.1.2

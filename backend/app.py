@@ -59,7 +59,9 @@ CORS(app, resources={r"/api/*": {"origins": [
     "http://localhost:5174",
     "https://www.cwaya.me",
     "https://cwaya.me",
-    "https://ai.cwaya.me"
+    "https://ai.cwaya.me",
+    "https://gour-himansh.hf.space",   # ✅ HF Space frontend
+    "https://*.hf.space",               # ✅ All HF spaces (wildcard)
 ]}})
 app.config['MAX_CONTENT_LENGTH'] = Config.MAX_CONTENT_LENGTH
 
@@ -130,14 +132,16 @@ def photographer_page():
 def user_page():
     return send_from_directory(os.path.join(STATIC_DIR, 'user'), 'index.html')
 
-# --- Health Check ---
 @app.route('/api/health')
 def health():
     engine = get_engine()
-    return {
+    res = {
         'status': 'healthy',
         'face_engine': 'ready' if engine.is_ready() else 'loading'
     }
+    if not engine.is_ready():
+        res['face_engine_error'] = engine.get_load_error()
+    return res
 
 @app.route('/api/debug/db-test')
 def db_test():
@@ -188,12 +192,12 @@ def startup_init():
     # Start face engine in background only when not testing
     if not Config.TESTING:
         logger.info("Starting face recognition engine in background thread...")
-    def _load_engine_bg():
-        try:
-            get_engine(Config.INSIGHTFACE_DIR)
-            logger.info("Face recognition engine is ready!")
-        except Exception as e:
-            logger.error(f"Face engine failed to load: {e}")
+        def _load_engine_bg():
+            try:
+                get_engine(Config.INSIGHTFACE_DIR)
+                logger.info("Face recognition engine is ready!")
+            except Exception as e:
+                logger.error(f"Face engine failed to load: {e}")
 
         bg_thread = threading.Thread(target=_load_engine_bg, daemon=True)
         bg_thread.start()

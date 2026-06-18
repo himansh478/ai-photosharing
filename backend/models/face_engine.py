@@ -33,15 +33,21 @@ class FaceEngine:
                 ctx = 0 if torch.cuda.is_available() else -1
             except ImportError:
                 ctx = -1
-            self._app.prepare(ctx_id=ctx, det_size=(896, 896), det_thresh=0.35)
+            # det_size=(640,640) is recommended for CPU-only (HF free tier)
+            # (896,896) was causing OOM crashes on Hugging Face
+            self._app.prepare(ctx_id=ctx, det_size=(640, 640), det_thresh=0.35)
             self._ready = True
             logger.info(f"InsightFace loaded (ctx={'GPU' if ctx >= 0 else 'CPU'})")
         except Exception as e:
             logger.error(f"InsightFace load failed: {e}")
             self._ready = False
+            self.load_error = str(e)
 
     def is_ready(self):
         return self._ready
+
+    def get_load_error(self):
+        return getattr(self, 'load_error', None)
 
     def detect_and_embed(self, image_path: str):
         """

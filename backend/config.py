@@ -1,4 +1,5 @@
 import os
+import sys
 from dotenv import load_dotenv
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -8,6 +9,7 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 
 class Config:
+    TESTING = 'pytest' in sys.modules or os.environ.get('TESTING', 'False').lower() in ('true', '1', 't')
     HOST = os.environ.get('HOST', '0.0.0.0')
     PORT = int(os.environ.get('PORT', 5001))
     DEBUG = os.environ.get('ENV') != 'production'

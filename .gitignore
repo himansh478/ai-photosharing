@@ -1,3 +1,9 @@
 logs_archive/webapp_logs_output/LogFiles/2026_04_21_lw1sdlwk0002MY_docker.log
 logs.zip
 logs/
+.env
+logs_archive/
+__pycache__/
+*.pyc
+venv/
+models_cache/

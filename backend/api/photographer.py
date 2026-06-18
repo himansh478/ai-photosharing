@@ -121,21 +121,40 @@ def _process_batch(job_id, photographer_id, items):
         engine = get_engine(Config.INSIGHTFACE_DIR)
         job = batch_jobs[job_id]
         
+        # Track how many upload futures are pending
+        futures = []
+        
         for item in items:
             try:
                 # 1. AI Scanning (CPU heavy)
                 embeddings = engine.detect_and_embed(item['temp_path'])
                 
+                if not embeddings:
+                    # No faces detected — skip upload, don't waste HF API quota
+                    logger.info(f"No faces in {item['filename']}, skipping upload.")
+                    job['skipped'] += 1
+                    job['processed'] += 1
+                    upload_service.cleanup_temp(item['temp_path'])
+                    continue
+
                 # 2. Upload (I/O heavy - send to Executor)
-                UPLOAD_EXECUTOR.submit(_finish_upload, item, embeddings, photographer_id, job)
+                future = UPLOAD_EXECUTOR.submit(_finish_upload, item, embeddings, photographer_id, job)
+                futures.append(future)
                 
             except Exception as e:
                 logger.error(f"Batch error: {e}")
                 job['skipped'] += 1
                 job['processed'] += 1
-                upload_service.cleanup_temp(item['temp_path']) # cleanup on AI error
-        
-        job['status'] = 'completed'
+                upload_service.cleanup_temp(item['temp_path'])
+
+    # Wait for ALL uploads to finish before marking complete
+    for f in futures:
+        try:
+            f.result()  # This blocks until each upload thread is done
+        except Exception as e:
+            logger.error(f"Upload future error: {e}")
+
+    job['status'] = 'completed'
 
 
 def _finish_upload(item, embeddings, photographer_id, job):
