@@ -1,4 +1,0 @@
-<step title="Incoming Request" date="2026-04-22T18:39:44.749" instance="e692bb" url="/dump" method="GET" type="request" pid="768,1,5" Host="cwaya-ai-share.scm.azurewebsites.net" User-Agent="AZURECLI/2.85.0 (MSI)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="9c2c81c6-3e7a-11f1-8cbf-66b07d5df642" X-ARR-LOG-ID="9c2c81c6-3e7a-11f1-8cbf-66b07d5df642" CLIENT-IP="106.77.156.8:21749" X-SITE-DEPLOYMENT-ID="cwaya-ai-share" WAS-DEFAULT-HOSTNAME="cwaya-ai-share.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/dump" X-Client-IP="106.77.156.8" X-Client-Port="21749" >
-  <step title="Cleanup Xml Logs" date="2026-04-22T18:39:44.771" /><!-- duration: 60ms -->
-  <step title="Outgoing response" date="2026-04-22T18:39:45.361" type="response" statusCode="200" statusText="OK" /><!-- duration: 4ms -->
-</step><!-- duration: 619ms -->
