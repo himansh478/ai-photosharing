@@ -1,507 +1,277 @@
-from flask import Blueprint, request, jsonify
-from datetime import datetime
-import os
-import sys
-import uuid
-import threading
 import logging
-import queue
+import re
+import threading
+import uuid
 from concurrent.futures import ThreadPoolExecutor
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import Config
-from database.db import get_db_conn, embedding_to_json
-from models.face_engine import get_engine
-from services.upload_service import UploadService
-from psycopg2.extras import RealDictCursor
+from flask import Blueprint, jsonify, request
+
+from backend.config import Config
+from backend.database import repo
+from backend.database.db import embedding_to_json
+from backend.extensions import limiter
+from backend.models.face_engine import EngineNotReady, ImageUnreadable, get_engine
+from backend.security import (CONTRIBUTOR_KEY_PREFIX, HOST_KEY_PREFIX, hash_key, new_guest_code,
+                              new_key, request_event_key, role_for_key)
+from backend.services import storage_service
+from backend.services.jobs import registry
+from backend.services.retention_service import delete_event_data
+from backend.validation import InvalidImage, file_sha256, strip_location, validate_image
 
 photographer_bp = Blueprint('photographer', __name__)
 logger = logging.getLogger(__name__)
-upload_service = UploadService()
-
-# Track async batch processing jobs
-batch_jobs = {}  # job_id -> status dict
 
 # 🛡️ PRODUCTION GUARD: Limit total threads across the whole app
 # Hum 2vCPUs par ek time par 1 AI aur 5 Upload process hi allow karenge
-AI_SEMAPHORE = threading.Semaphore(1) 
+AI_SEMAPHORE = threading.Semaphore(1)
 UPLOAD_EXECUTOR = ThreadPoolExecutor(max_workers=5)
+
+_EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+_MAX_FIELD_LENGTH = 120
+
+
+def _authorised_event(code, allowed_roles):
+    """Look up the event for `code` and check the caller's key.
+
+    Returns (event, role, None) on success or (None, None, error_response).
+    """
+    if not code:
+        return None, None, (jsonify({'error': 'code is required'}), 400)
+    event = repo.get_event_by_code(code)
+    if not event:
+        return None, None, (jsonify({'error': 'Invalid event code'}), 401)
+    if not event.get('host_key_hash'):
+        # Events created before upload keys existed have none until an admin issues them.
+        return None, None, (jsonify({
+            'error': 'This event has no upload key yet. Ask the administrator to issue one.'
+        }), 403)
+    role = role_for_key(event, request_event_key())
+    if role not in allowed_roles:
+        return None, None, (jsonify({'error': 'A valid upload key is required for this event'}), 403)
+    return event, role, None
 
 
 @photographer_bp.route('/api/photographer/register', methods=['POST'])
+@limiter.limit("10 per hour")
 def register():
-    data = request.json or {}
-    name = data.get('name', '').strip()
-    email = data.get('email', '').strip()
-    event_name = data.get('event_name', '').strip()
+    data = request.get_json(silent=True) or {}
+    name = str(data.get('name', '')).strip()
+    email = str(data.get('email', '')).strip()
+    event_name = str(data.get('event_name', '')).strip()
+    event_type = str(data.get('event_type', 'other')).strip().lower() or 'other'
 
     if not all([name, email, event_name]):
         return jsonify({'error': 'name, email, event_name are required'}), 400
+    if max(len(name), len(email), len(event_name)) > _MAX_FIELD_LENGTH:
+        return jsonify({'error': f'Fields must be at most {_MAX_FIELD_LENGTH} characters'}), 400
+    if not _EMAIL_RE.match(email):
+        return jsonify({'error': 'Please enter a valid email address'}), 400
+    if event_type not in Config.EVENT_TYPES:
+        return jsonify({'error': 'Unknown event type'}), 400
 
     pid = str(uuid.uuid4())
-    code = f"EVT-{datetime.now().year}-{uuid.uuid4().hex[:6].upper()}"
+    code = new_guest_code()
+    host_key = new_key(HOST_KEY_PREFIX)
+    contributor_key = new_key(CONTRIBUTOR_KEY_PREFIX)
 
     try:
-        with get_db_conn() as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                "INSERT INTO photographers (id, name, email, event_name, code) VALUES (%s,%s,%s,%s,%s)",
-                (pid, name, email, event_name, code)
-            )
-            conn.commit()
-            cursor.close()
+        repo.create_event(pid, name, email, event_name, event_type, code,
+                          hash_key(host_key), hash_key(contributor_key))
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        logger.error(f"Event registration failed: {e}")
+        return jsonify({'error': 'Could not create the event. Please try again.'}), 500
 
+    # The keys are returned once and only their hashes are kept, so they cannot be shown again.
     return jsonify({
-        'photographer_id': pid,
         'code': code,
         'event_name': event_name,
+        'event_type': event_type,
+        'host_key': host_key,
+        'contributor_key': contributor_key,
         'status': 'ready_for_upload'
     }), 201
 
 
-@photographer_bp.route('/api/photographer/upload-batch', methods=['POST'])
-def upload_batch():
-    code = request.form.get('code', '').strip()
-    files = request.files.getlist('photos')
+@photographer_bp.route('/api/photographer/access', methods=['GET'])
+@limiter.limit("30 per minute")
+def access():
+    """Tell the caller which role their key has for an event."""
+    code = request.args.get('code', '').strip().upper()
+    event, role, error = _authorised_event(code, ('host', 'contributor'))
+    if error:
+        return error
+    return jsonify({'role': role, 'code': event['code'], 'event_name': event['event_name']})
 
-    if not code:
-        return jsonify({'error': 'code is required'}), 400
+
+@photographer_bp.route('/api/photographer/upload-batch', methods=['POST'])
+@limiter.limit("120 per minute")
+def upload_batch():
+    code = request.form.get('code', '').strip().upper()
+    files = [f for f in request.files.getlist('photos') if f and f.filename]
+
+    event, _role, error = _authorised_event(code, ('host', 'contributor'))
+    if error:
+        return error
     if not files:
         return jsonify({'error': 'No photos provided'}), 400
     if len(files) > Config.MAX_PHOTOS_PER_BATCH:
         return jsonify({'error': f'Maximum {Config.MAX_PHOTOS_PER_BATCH} photos allowed per batch.'}), 400
 
-    try:
-        with get_db_conn() as conn:
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            cursor.execute("SELECT * FROM photographers WHERE code=%s", (code,))
-            p = cursor.fetchone()
-            cursor.close()
-    except Exception as e:
-        return jsonify({'error': 'Database connect error'}), 500
+    # Accepting photos while the model is unavailable would process none of them.
+    engine = get_engine()
+    if not engine.is_ready():
+        engine.load_in_background()
+        response = jsonify({'error': 'The face recognition engine is starting. Please retry shortly.',
+                            'face_engine': engine.state()})
+        response.headers['Retry-After'] = '20'
+        return response, 503
 
-    if not p:
-        return jsonify({'error': 'Invalid photographer code'}), 401
-
-    photographer_id = p['id']
+    # A large upload arrives as several requests that all report into one job.
+    job_id = request.form.get('job_id', '').strip()
+    if job_id:
+        job = registry.get(job_id)
+        if not job or job.event_id != event['id']:
+            return jsonify({'error': 'Job not found'}), 404
+    else:
+        job = registry.create(event['id'])
 
     # 1. Save all files to TEMP first for processing
-    to_process = []
-    for f in files:
-        if f and f.filename:
-            temp_path = upload_service.save_to_temp(f)
-            to_process.append({'temp_path': temp_path, 'filename': f.filename})
+    to_process = [{'temp_path': storage_service.save_to_temp(f), 'filename': f.filename} for f in files]
 
     # 2. Start async processing and cloud upload
-    job_id = str(uuid.uuid4())
-    batch_jobs[job_id] = {
-        'status': 'processing',
-        'total': len(to_process),
-        'processed': 0,
-        'uploaded': 0,
-        'skipped': 0
-    }
-
-    t = threading.Thread(target=_process_batch, args=(job_id, photographer_id, to_process))
+    job.add_batch(len(to_process))
+    t = threading.Thread(target=_process_batch, args=(job, event['id'], to_process))
     t.daemon = True
     t.start()
 
     return jsonify({
-        'job_id': job_id,
+        'job_id': job.id,
         'files_received': len(to_process),
         'message': 'Batch upload and processing started.'
     }), 202
 
 
-def _process_batch(job_id, photographer_id, items):
-    # 🔒 ANTI-CRASH LOCK: Wait if another batch is already being AI-scanned
-    with AI_SEMAPHORE:
-        engine = get_engine(Config.INSIGHTFACE_DIR)
-        job = batch_jobs[job_id]
-        
-        # Track how many upload futures are pending
-        futures = []
-        
-        for item in items:
-            try:
-                # 1. AI Scanning (CPU heavy)
-                embeddings = engine.detect_and_embed(item['temp_path'])
-                
-                if not embeddings:
-                    # No faces detected — skip upload, don't waste HF API quota
-                    logger.info(f"No faces in {item['filename']}, skipping upload.")
-                    job['skipped'] += 1
-                    job['processed'] += 1
-                    upload_service.cleanup_temp(item['temp_path'])
+def _process_batch(job, event_id, items):
+    futures = []
+    try:
+        # 🔒 ANTI-CRASH LOCK: Wait if another batch is already being AI-scanned
+        with AI_SEMAPHORE:
+            engine = get_engine()
+            for item in items:
+                temp_path, filename = item['temp_path'], item['filename']
+                try:
+                    validate_image(temp_path, Config.MAX_PHOTO_BYTES)
+                    sha256 = file_sha256(temp_path)
+                    if repo.photo_hash_exists(event_id, sha256):
+                        job.record('duplicate')
+                        storage_service.cleanup_temp(temp_path)
+                        continue
+                    strip_location(temp_path)
+
+                    # 1. AI Scanning (CPU heavy)
+                    embeddings = engine.detect_and_embed(temp_path)
+
+                    # 2. Upload (I/O heavy - send to Executor)
+                    futures.append(UPLOAD_EXECUTOR.submit(
+                        _finish_upload, job, event_id, item, embeddings, sha256, engine.model_version))
                     continue
+                except InvalidImage as e:
+                    job.record('failed', filename, str(e))
+                except EngineNotReady:
+                    job.record('failed', filename, 'Face recognition engine unavailable')
+                except ImageUnreadable:
+                    job.record('failed', filename, 'Could not read the image')
+                except Exception as e:
+                    logger.error(f"Batch error for {filename}: {e}", exc_info=True)
+                    job.record('failed', filename, 'Processing error')
+                storage_service.cleanup_temp(temp_path)
 
-                # 2. Upload (I/O heavy - send to Executor)
-                future = UPLOAD_EXECUTOR.submit(_finish_upload, item, embeddings, photographer_id, job)
-                futures.append(future)
-                
-            except Exception as e:
-                logger.error(f"Batch error: {e}")
-                job['skipped'] += 1
-                job['processed'] += 1
-                upload_service.cleanup_temp(item['temp_path'])
-
-    # Wait for ALL uploads to finish before marking complete
-    for f in futures:
-        try:
-            f.result()  # This blocks until each upload thread is done
-        except Exception as e:
-            logger.error(f"Upload future error: {e}")
-
-    job['status'] = 'completed'
+        # Wait for ALL uploads to finish before marking complete
+        for f in futures:
+            f.result()
+    finally:
+        job.close_batch()
 
 
-def _finish_upload(item, embeddings, photographer_id, job):
+def _finish_upload(job, event_id, item, embeddings, sha256, model_version):
     # This runs in background UPLOAD_EXECUTOR
     temp_path = item['temp_path']
     filename = item['filename']
     face_count = len(embeddings)
+    stored_keys = []
 
     try:
-        # Upload to Cloud
-        cloud_url = upload_service.save_photo(temp_path, filename)
-        thumb_url = upload_service.generate_thumbnail(temp_path)
+        photo_key = storage_service.store_photo(temp_path, filename)
+        stored_keys.append(photo_key)
+        try:
+            thumb_key = storage_service.store_thumbnail(temp_path)
+            stored_keys.append(thumb_key)
+        except Exception as e:
+            logger.error(f"Thumbnail generation/upload failed for {filename}: {e}")
+            thumb_key = ''
 
-        # Save to DB
-        photo_id = str(uuid.uuid4())
-        with get_db_conn() as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                """INSERT INTO photos (id, photographer_id, file_path, thumbnail_path, original_filename, face_count, embeddings)
-                   VALUES (%s,%s,%s,%s,%s,%s,%s)""",
-                (photo_id, photographer_id, cloud_url, thumb_url, filename, face_count, embedding_to_json(embeddings))
-            )
-            cursor.execute(
-                "UPDATE photographers SET total_photos = total_photos + 1 WHERE id = %s",
-                (photographer_id,)
-            )
-            conn.commit()
-            cursor.close()
-
-        if face_count > 0:
-            job['uploaded'] += 1
+        inserted = repo.insert_photo(
+            str(uuid.uuid4()), event_id, photo_key, thumb_key, filename, face_count,
+            embedding_to_json(embeddings) if face_count else None, sha256, model_version)
+        if not inserted:
+            # The same file arrived twice at once; keep the first copy only.
+            storage_service.get_storage().delete_many(stored_keys)
+            job.record('duplicate')
         else:
-            job['skipped'] += 1
-
+            # Photos without faces are kept too: they go to the album every guest can see.
+            job.record('uploaded' if face_count > 0 else 'no_face')
     except Exception as e:
-        logger.error(f"Consumer error for {filename}: {e}")
-        job['skipped'] += 1
+        logger.error(f"Upload error for {filename}: {e}", exc_info=True)
+        try:
+            storage_service.get_storage().delete_many(stored_keys)
+        except Exception as cleanup_error:
+            logger.error(f"Could not remove partial upload for {filename}: {cleanup_error}")
+        job.record('failed', filename, 'Could not store the photo')
     finally:
-        upload_service.cleanup_temp(temp_path)
-        job['processed'] += 1
+        storage_service.cleanup_temp(temp_path)
 
 
 @photographer_bp.route('/api/photographer/batch-status/<job_id>', methods=['GET'])
 def batch_status(job_id):
-    job = batch_jobs.get(job_id)
+    job = registry.get(job_id)
     if not job:
         return jsonify({'error': 'Job not found'}), 404
-    return jsonify(job)
+    return jsonify(job.snapshot())
 
 
 @photographer_bp.route('/api/photographer/stats', methods=['GET'])
+@limiter.limit("60 per minute")
 def stats():
-    code = request.args.get('code', '').strip()
+    code = request.args.get('code', '').strip().upper()
+    event, _role, error = _authorised_event(code, ('host',))
+    if error:
+        return error
     try:
-        with get_db_conn() as conn:
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-
-            cursor.execute("SELECT * FROM photographers WHERE code=%s", (code,))
-            p = cursor.fetchone()
-            if not p:
-                cursor.close()
-                return jsonify({'error': 'Invalid code'}), 401
-
-            pid = p['id']
-
-            cursor.execute("SELECT COUNT(*) FROM photos WHERE photographer_id=%s AND face_count > 0", (pid,))
-            faces_detected = cursor.fetchone()['count']
-
-            cursor.execute("""
-                SELECT COUNT(*) FROM download_logs dl 
-                JOIN user_sessions us ON dl.session_id=us.id 
-                WHERE us.photographer_id=%s
-            """, (pid,))
-            total_downloads = cursor.fetchone()['count']
-
-            cursor.execute("SELECT COUNT(*) FROM user_sessions WHERE photographer_id=%s", (pid,))
-            total_users = cursor.fetchone()['count']
-
-            cursor.close()
+        counts = repo.event_stats(event['id'])
     except Exception as e:
-         return jsonify({'error': 'Database error'}), 500
+        logger.error(f"Stats query failed: {e}")
+        return jsonify({'error': 'Database error'}), 500
 
     return jsonify({
-        'code': code,
-        'event_name': p['event_name'],
-        'photographer_name': p['name'],
-        'total_photos': p['total_photos'],
-        'faces_detected': faces_detected,
-        'total_users': total_users,
-        'total_downloads': total_downloads
+        'code': event['code'],
+        'event_name': event['event_name'],
+        'photographer_name': event['name'],
+        'total_photos': event['total_photos'],
+        'faces_detected': counts['faces_detected'],
+        'common_photos': counts['common_photos'],
+        'total_users': counts['total_users'],
+        'total_downloads': counts['total_downloads']
     })
 
 
-
-# from flask import Blueprint, request, jsonify
-# from datetime import datetime
-# import os
-# import sys
-# import uuid
-# import threading
-# import logging
-# import queue
-# from concurrent.futures import ThreadPoolExecutor
-
-# sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-# from config import Config
-# from database.db import get_conn, release_conn, embedding_to_json
-# from models.face_engine import get_engine
-# from services.upload_service import UploadService
-# from psycopg2.extras import RealDictCursor
-
-# photographer_bp = Blueprint('photographer', __name__)
-# logger = logging.getLogger(__name__)
-# upload_service = UploadService()
-
-# # Track async batch processing jobs
-# batch_jobs = {}  # job_id -> status dict
-
-
-# @photographer_bp.route('/api/photographer/register', methods=['POST'])
-# def register():
-#     data = request.json or {}
-#     name = data.get('name', '').strip()
-#     email = data.get('email', '').strip()
-#     event_name = data.get('event_name', '').strip()
-
-#     if not all([name, email, event_name]):
-#         return jsonify({'error': 'name, email, event_name are required'}), 400
-
-#     pid = str(uuid.uuid4())
-#     code = f"EVT-{datetime.now().year}-{uuid.uuid4().hex[:6].upper()}"
-
-#     conn = get_conn()
-#     try:
-#         cursor = conn.cursor()
-#         cursor.execute(
-#             "INSERT INTO photographers (id, name, email, event_name, code) VALUES (%s,%s,%s,%s,%s)",
-#             (pid, name, email, event_name, code)
-#         )
-#         conn.commit()
-#         cursor.close()
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
-#     finally:
-#         release_conn(conn)
-
-#     return jsonify({
-#         'photographer_id': pid,
-#         'code': code,
-#         'event_name': event_name,
-#         'status': 'ready_for_upload'
-#     }), 201
-
-
-# @photographer_bp.route('/api/photographer/upload-batch', methods=['POST'])
-# def upload_batch():
-#     code = request.form.get('code', '').strip()
-#     files = request.files.getlist('photos')
-
-#     if not code:
-#         return jsonify({'error': 'code is required'}), 400
-#     if not files:
-#         return jsonify({'error': 'No photos provided'}), 400
-#     if len(files) > Config.MAX_PHOTOS_PER_BATCH:
-#         return jsonify({'error': f'Maximum {Config.MAX_PHOTOS_PER_BATCH} photos allowed per batch.'}), 400
-
-#     conn = get_conn()
-#     try:
-#         cursor = conn.cursor(cursor_factory=RealDictCursor)
-#         cursor.execute("SELECT * FROM photographers WHERE code=%s", (code,))
-#         p = cursor.fetchone()
-#         cursor.close()
-#     finally:
-#         release_conn(conn)
-
-#     if not p:
-#         return jsonify({'error': 'Invalid photographer code'}), 401
-
-#     photographer_id = p['id']
-
-#     # 1. Save all files to TEMP first for processing
-#     to_process = []
-#     for f in files:
-#         if f and f.filename:
-#             temp_path = upload_service.save_to_temp(f)
-#             to_process.append({'temp_path': temp_path, 'filename': f.filename})
-
-#     # 2. Start async processing and cloud upload
-#     job_id = str(uuid.uuid4())
-#     batch_jobs[job_id] = {
-#         'status': 'processing',
-#         'total': len(to_process),
-#         'processed': 0,
-#         'uploaded': 0,
-#         'skipped': 0
-#     }
-
-#     t = threading.Thread(target=_process_batch, args=(job_id, photographer_id, to_process))
-#     t.daemon = True
-#     t.start()
-
-#     return jsonify({
-#         'job_id': job_id,
-#         'files_received': len(to_process),
-#         'message': 'Batch upload and processing started.'
-#     }), 202
-
-
-# def _ai_producer(items, engine, upload_queue, job):
-#     """Wait-free AI face detection: only focuses on CPU-intensive work."""
-#     for item in items:
-#         try:
-#             temp_path = item['temp_path']
-#             filename = item['filename']
-
-#             # A. Detect faces (CPU-bound)
-#             embeddings = engine.detect_and_embed(temp_path)
-#             face_count = len(embeddings)
-
-#             # Pass data forward to the uploaders
-#             upload_queue.put({
-#                 'temp_path': temp_path,
-#                 'filename': filename,
-#                 'embeddings': embeddings,
-#                 'face_count': face_count
-#             })
-#         except Exception as e:
-#             logger.error(f"Producer error for {item.get('filename')}: {e}")
-#             job['skipped'] += 1
-#             job['processed'] += 1
-
-#     # Signal that AI work is done
-#     upload_queue.put(None)
-
-# def _upload_consumer(upload_queue, photographer_id, job):
-#     """Network-bound upload: only focuses on I/O-intensive work."""
-#     while True:
-#         data = upload_queue.get()
-#         if data is None:
-#             upload_queue.put(None)  # Pass the signal to other workers
-#             break
-
-#         temp_path = data['temp_path']
-#         filename = data['filename']
-#         embeddings = data['embeddings']
-#         face_count = data['face_count']
-#         conn = None
-
-#         try:
-#             # B. Upload to ImgBB (I/O-bound)
-#             cloud_url = upload_service.save_photo(temp_path, filename)
-#             thumb_url = upload_service.generate_thumbnail(temp_path)
-
-#             # C. Save to Supabase (Postgres)
-#             photo_id = str(uuid.uuid4())
-#             conn = get_conn()
-#             cursor = conn.cursor()
-#             cursor.execute(
-#                 """INSERT INTO photos (id, photographer_id, file_path, thumbnail_path, original_filename, face_count, embeddings)
-#                    VALUES (%s,%s,%s,%s,%s,%s,%s)""",
-#                 (photo_id, photographer_id, cloud_url, thumb_url, filename, face_count, embedding_to_json(embeddings))
-#             )
-#             cursor.execute(
-#                 "UPDATE photographers SET total_photos = total_photos + 1 WHERE id = %s",
-#                 (photographer_id,)
-#             )
-#             conn.commit()
-#             cursor.close()
-
-#             if face_count > 0:
-#                 job['uploaded'] += 1
-#             else:
-#                 job['skipped'] += 1
-
-#         except Exception as e:
-#             logger.error(f"Consumer error for {filename}: {e}")
-#             job['skipped'] += 1
-#         finally:
-#             release_conn(conn)
-#             # D. Cleanup local temp file
-#             upload_service.cleanup_temp(temp_path)
-#             job['processed'] += 1
-
-#         upload_queue.task_done()
-
-# def _process_batch(job_id, photographer_id, items):
-#     engine = get_engine(Config.INSIGHTFACE_DIR)
-#     job = batch_jobs[job_id]
-#     upload_queue = queue.Queue(maxsize=20)  # Buffer to prevent memory bloating
-
-#     with ThreadPoolExecutor(max_workers=11) as executor:
-#         # One producer thread for AI
-#         executor.submit(_ai_producer, items, engine, upload_queue, job)
-
-#         # 10 consumer threads for simultaneous cloud uploads
-#         for _ in range(10):
-#             executor.submit(_upload_consumer, upload_queue, photographer_id, job)
-
-#     job['status'] = 'completed'
-
-
-# @photographer_bp.route('/api/photographer/batch-status/<job_id>', methods=['GET'])
-# def batch_status(job_id):
-#     job = batch_jobs.get(job_id)
-#     if not job:
-#         return jsonify({'error': 'Job not found'}), 404
-#     return jsonify(job)
-
-
-# @photographer_bp.route('/api/photographer/stats', methods=['GET'])
-# def stats():
-#     code = request.args.get('code', '').strip()
-#     conn = get_conn()
-#     try:
-#         cursor = conn.cursor(cursor_factory=RealDictCursor)
-
-#         cursor.execute("SELECT * FROM photographers WHERE code=%s", (code,))
-#         p = cursor.fetchone()
-#         if not p:
-#             cursor.close()
-#             return jsonify({'error': 'Invalid code'}), 401
-
-#         pid = p['id']
-
-#         cursor.execute("SELECT COUNT(*) FROM photos WHERE photographer_id=%s AND face_count > 0", (pid,))
-#         faces_detected = cursor.fetchone()['count']
-
-#         cursor.execute("""
-#             SELECT COUNT(*) FROM download_logs dl 
-#             JOIN user_sessions us ON dl.session_id=us.id 
-#             WHERE us.photographer_id=%s
-#         """, (pid,))
-#         total_downloads = cursor.fetchone()['count']
-
-#         cursor.execute("SELECT COUNT(*) FROM user_sessions WHERE photographer_id=%s", (pid,))
-#         total_users = cursor.fetchone()['count']
-
-#         cursor.close()
-#     finally:
-#         release_conn(conn)
-
-#     return jsonify({
-#         'code': code,
-#         'event_name': p['event_name'],
-#         'photographer_name': p['name'],
-#         'total_photos': p['total_photos'],
-#         'faces_detected': faces_detected,
-#         'total_users': total_users,
-#         'total_downloads': total_downloads
-#     })
+@photographer_bp.route('/api/photographer/event', methods=['DELETE'])
+@limiter.limit("10 per hour")
+def delete_event():
+    """Permanently delete an event with all of its photos and guest sessions."""
+    code = request.args.get('code', '').strip().upper()
+    event, _role, error = _authorised_event(code, ('host',))
+    if error:
+        return error
+    files_removed = delete_event_data(event['id'])
+    logger.info(f"Event {event['code']} deleted by its host ({files_removed} files)")
+    return jsonify({'deleted': True, 'files_removed': files_removed})

@@ -1,180 +1,161 @@
-from flask import Blueprint, request, jsonify, redirect
-import os
-import sys
-import uuid
 import logging
-import requests
+import uuid
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import Config
-from database.db import get_db_conn
-from models.face_engine import get_engine
-from services.upload_service import UploadService
-from services.matching_service import MatchingService
-from psycopg2.extras import RealDictCursor
-from extensions import limiter
+from flask import Blueprint, jsonify, redirect, request
+
+from backend.config import Config
+from backend.database import repo
+from backend.extensions import limiter
+from backend.models.face_engine import EngineNotReady, ImageUnreadable, get_engine
+from backend.security import signed_media_url, storage_key
+from backend.services import storage_service
+from backend.services.matching_service import MatchingService
+from backend.validation import InvalidImage, validate_image
 
 user_bp = Blueprint('user', __name__)
 logger = logging.getLogger(__name__)
-upload_service = UploadService()
 matching_service = MatchingService()
+
+_COMMON_PAGE_SIZE = 60
+
+
+def _photo_card(photo_id, thumbnail_path, session_id, similarity=None):
+    thumb_key = storage_key(thumbnail_path)
+    card = {
+        'photo_id': photo_id,
+        'thumbnail_url': signed_media_url(thumb_key) if thumb_key else None,
+        'download_url': f'/api/user/download/{photo_id}?session_id={session_id}',
+    }
+    if similarity is not None:
+        card['similarity'] = similarity
+    return card
 
 
 @user_bp.route('/api/user/verify-code', methods=['POST'])
-@limiter.limit("5 per minute")
+@limiter.limit("30 per minute")
 def verify_code():
-    code = (request.get_json(silent=True) or {}).get('code', '').strip().upper()
+    code = str((request.get_json(silent=True) or {}).get('code', '')).strip().upper()
     if not code:
         return jsonify({'valid': False, 'error': 'Code is required'}), 400
 
     try:
-        with get_db_conn() as conn:
-            cursor = conn.cursor(cursor_factory=RealDictCursor)
-            cursor.execute("SELECT * FROM photographers WHERE code=%s", (code,))
-            p = cursor.fetchone()
-            cursor.close()
+        event = repo.get_event_by_code(code)
     except Exception as e:
-        logger.warning(f"Direct DB connection failed, trying REST API: {e}")
-        # Fallback to Supabase REST API
-        try:
-            # We need SUPABASE_URL and SUPABASE_ANON_KEY from environment
-            supabase_url = os.environ.get('VITE_SUPABASE_URL')
-            anon_key = os.environ.get('VITE_SUPABASE_ANON_KEY')
-            if supabase_url and anon_key:
-                rest_url = f"{supabase_url}/rest/v1/photographers?code=eq.{code}&select=*"
-                headers = {
-                    "apikey": anon_key,
-                    "Authorization": f"Bearer {anon_key}"
-                }
-                response = requests.get(rest_url, headers=headers, timeout=5)
-                if response.status_code == 200:
-                    data = response.json()
-                    p = data[0] if data else None
-                else:
-                    logger.error(f"REST API failed: {response.status_code} {response.text}")
-                    p = None
-            else:
-                logger.error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY for REST fallback")
-                p = None
-        except Exception as rest_err:
-            logger.error(f"REST API fallback error: {rest_err}")
-            p = None
+        logger.error(f"Event lookup failed: {e}")
+        return jsonify({'valid': False, 'error': 'Service temporarily unavailable'}), 503
 
-    if not p:
+    if not event:
         return jsonify({'valid': False, 'error': 'Invalid event code'}), 400
 
     return jsonify({
         'valid': True,
-        'event_name': p['event_name'],
-        'photographer_name': p['name'],
-        'photographer_id': p['id'],
-        'total_photos': p['total_photos']
+        'event_name': event['event_name'],
+        'photographer_name': event['name'],
+        'total_photos': event['total_photos']
     })
 
+
 @user_bp.route('/api/user/upload-selfie', methods=['POST'])
+@limiter.limit("30 per minute; 300 per hour")
 def upload_selfie():
     code = request.form.get('code', '').strip().upper()
     photo = request.files.get('photo')
 
     if not code or not photo:
         return jsonify({'error': 'code and photo are required'}), 400
+    # Face matching uses biometric data, so the guest has to agree to it explicitly.
+    if request.form.get('consent', '').strip().lower() not in ('yes', 'true', '1'):
+        return jsonify({'error': 'Please agree to face matching before searching.'}), 400
 
-    with get_db_conn() as conn:
-        cursor = conn.cursor(cursor_factory=RealDictCursor)
-        cursor.execute("SELECT * FROM photographers WHERE code=%s", (code,))
-        p = cursor.fetchone()
-        cursor.close()
-
-    if not p:
+    event = repo.get_event_by_code(code)
+    if not event:
         return jsonify({'error': 'Invalid event code'}), 401
 
-    photographer_id = p['id']
-
-    # 1. Save selfie to temp for processing
-    temp_path = upload_service.save_temp_photo(photo)
-
-    # 2. Extract face embedding
-    engine = get_engine(Config.INSIGHTFACE_DIR)
+    engine = get_engine()
     if not engine.is_ready():
-        upload_service.cleanup_temp(temp_path)
-        return jsonify({'error': 'Face recognition engine not ready.'}), 503
+        engine.load_in_background()
+        response = jsonify({'error': 'Face recognition engine not ready. Please retry shortly.'})
+        response.headers['Retry-After'] = '20'
+        return response, 503
 
-    user_embedding = engine.get_user_embedding(temp_path)
+    # The selfie only ever exists as a temp file: it is deleted as soon as the face
+    # has been read from it, and is never uploaded or stored.
+    temp_path = storage_service.save_to_temp(photo)
+    try:
+        validate_image(temp_path, Config.MAX_SELFIE_BYTES)
+        user_embedding = engine.get_user_embedding(temp_path)
+    except InvalidImage as e:
+        return jsonify({'error': str(e)}), 400
+    except ImageUnreadable:
+        return jsonify({'error': 'Could not read your photo. Please try another one.'}), 400
+    except EngineNotReady:
+        return jsonify({'error': 'Face recognition engine not ready. Please retry shortly.'}), 503
+    finally:
+        storage_service.cleanup_temp(temp_path)
+
     if user_embedding is None:
-        upload_service.cleanup_temp(temp_path)
         return jsonify({'error': 'No face detected in your photo.'}), 400
 
-    # 3. Upload selfie to ImgBB for persistence
-    try:
-        cloud_selfie_url = upload_service.save_photo(temp_path, "selfie.jpg")
-    except Exception:
-        cloud_selfie_url = ""
+    matches = matching_service.find_matches(user_embedding, event['id'])
 
-    # 4. Find matching photos
-    matches = matching_service.find_matches(user_embedding, photographer_id)
-
-    # 5. Create session in Supabase
+    # The session records exactly which photos this guest may open.
     session_id = str(uuid.uuid4())
-    with get_db_conn() as conn:
-        cursor = conn.cursor()
-        cursor.execute(
-            "INSERT INTO user_sessions (id, photographer_id, selfie_path, matched_count) VALUES (%s,%s,%s,%s)",
-            # Existing code...
-            (session_id, photographer_id, cloud_selfie_url, len(matches))
-        )
-        conn.commit()
-        cursor.close()
-
-    # Cleanup temp
-    upload_service.cleanup_temp(temp_path)
-
-    # Attach session_id to each download URL
-    for m in matches:
-        m['download_url'] = f"{m['download_url']}?session_id={session_id}"
+    repo.create_session(session_id, event['id'],
+                        [(m['photo_id'], m['similarity']) for m in matches],
+                        Config.SESSION_TTL_HOURS)
 
     return jsonify({
         'session_id': session_id,
         'matched_count': len(matches),
-        'photos': matches
+        'photos': [_photo_card(m['photo_id'], m['thumbnail_path'], session_id, m['similarity'])
+                   for m in matches],
+        'common_count': repo.count_common_photos(event['id']),
+    })
+
+
+@user_bp.route('/api/user/common-photos', methods=['GET'])
+@limiter.limit("120 per minute")
+def common_photos():
+    """Photos without faces (decor, rituals, venue), visible to every guest of the event."""
+    session = repo.get_active_session(request.args.get('session_id', ''))
+    if not session:
+        return jsonify({'error': 'Session expired. Please search again.'}), 401
+    try:
+        offset = max(0, int(request.args.get('offset', 0)))
+    except ValueError:
+        offset = 0
+
+    rows = repo.common_photos(session['photographer_id'], _COMMON_PAGE_SIZE, offset)
+    return jsonify({
+        'photos': [_photo_card(r['id'], r['thumbnail_path'], session['id']) for r in rows],
+        'next_offset': offset + len(rows) if len(rows) == _COMMON_PAGE_SIZE else None,
     })
 
 
 @user_bp.route('/api/user/download/<photo_id>', methods=['GET'])
 def download_photo(photo_id):
     session_id = request.args.get('session_id', '')
-
     if not session_id:
         return jsonify({'error': 'session_id is required'}), 401
 
-    with get_db_conn() as conn:
-        cursor = conn.cursor(cursor_factory=RealDictCursor)
-        cursor.execute("SELECT * FROM photos WHERE id=%s", (photo_id,))
-        photo = cursor.fetchone()
-        if photo:
-            cursor.execute("SELECT * FROM user_sessions WHERE id=%s", (session_id,))
-            session = cursor.fetchone()
-        else:
-            session = None
-        cursor.close()
-
-    if not photo:
+    # Same answer whether the photo does not exist or simply is not this guest's.
+    photo = repo.session_photo(session_id, photo_id)
+    key = storage_key(photo['file_path']) if photo else None
+    if not key:
         return jsonify({'error': 'Photo not found'}), 404
 
-    if not session or session.get('photographer_id') != photo.get('photographer_id'):
-        return jsonify({'error': 'Invalid session for this photo'}), 401
-
-    # Log download
     try:
-        with get_db_conn() as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                "INSERT INTO download_logs (id, session_id, photo_id) VALUES (%s,%s,%s)",
-                (str(uuid.uuid4()), session_id, photo_id)
-            )
-            conn.commit()
-            cursor.close()
-    except Exception:
-        pass
+        repo.log_download(str(uuid.uuid4()), session_id, photo_id)
+    except Exception as e:
+        logger.warning(f"Could not log download: {e}")
 
-    # Redirect to cloud URL instead of serving file locally
-    return redirect(photo['file_path'])
+    return redirect(signed_media_url(key, ttl=Config.DOWNLOAD_URL_TTL, download=True))
+
+
+@user_bp.route('/api/user/session/<session_id>', methods=['DELETE'])
+@limiter.limit("30 per minute")
+def delete_session(session_id):
+    """A guest removes their search and its history ("delete my data")."""
+    if not repo.delete_session(session_id):
+        return jsonify({'error': 'Session not found'}), 404
+    return jsonify({'deleted': True})

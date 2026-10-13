@@ -1,53 +1,96 @@
-import cv2
-import numpy as np
-import os
-import sys
 import logging
+import threading
+
+from backend.config import Config
 
 logger = logging.getLogger(__name__)
 
 
+class EngineNotReady(RuntimeError):
+    """The model is still loading or failed to load; nothing can be detected yet."""
+
+
+class ImageUnreadable(ValueError):
+    """The file could not be decoded as an image."""
+
+
 class FaceEngine:
-    """
-    InsightFace-based face detection + embedding extraction.
-    Falls back to a dummy mode if insightface is not installed.
+    """InsightFace face detection + embedding extraction.
+
+    Creating the object is cheap. The model is loaded by load(), which is meant to run
+    in a background thread so the web server can start answering immediately.
     """
 
-    def __init__(self, model_dir=None):
+    def __init__(self, model_dir=None, model_pack=None):
         self._app = None
-        self._ready = False
         self._model_dir = model_dir
-        self._load()
+        self._model_pack = model_pack or Config.FACE_MODEL_PACK
+        self._state = 'not_loaded'   # not_loaded | loading | ready | failed
+        self._load_error = None
+        self._load_lock = threading.Lock()
 
-    def _load(self):
-        try:
-            import insightface
-            from insightface.app import FaceAnalysis
-            kwargs = {}
-            if self._model_dir:
-                kwargs['root'] = self._model_dir
-            self._app = FaceAnalysis(name='buffalo_l', **kwargs)
-            # ctx_id=0 → GPU, ctx_id=-1 → CPU
+    @property
+    def model_version(self):
+        """Stored with every embedding: embeddings from different models cannot be compared."""
+        return self._model_pack
+
+    def load(self):
+        """Load the model once. Safe to call from several threads; later calls are no-ops."""
+        with self._load_lock:
+            if self._state == 'ready':
+                return
+            self._state = 'loading'
             try:
-                import torch
-                ctx = 0 if torch.cuda.is_available() else -1
-            except ImportError:
-                ctx = -1
-            # det_size=(640,640) is recommended for CPU-only (HF free tier)
-            # (896,896) was causing OOM crashes on Hugging Face
-            self._app.prepare(ctx_id=ctx, det_size=(640, 640), det_thresh=0.35)
-            self._ready = True
-            logger.info(f"InsightFace loaded (ctx={'GPU' if ctx >= 0 else 'CPU'})")
-        except Exception as e:
-            logger.error(f"InsightFace load failed: {e}")
-            self._ready = False
-            self.load_error = str(e)
+                from insightface.app import FaceAnalysis
+                kwargs = {}
+                if self._model_dir:
+                    kwargs['root'] = self._model_dir
+                # Only detection and recognition are used. The model pack also ships
+                # gender/age and two landmark models; loading them would run three
+                # extra networks on every face for results nobody reads.
+                app = FaceAnalysis(name=self._model_pack,
+                                   allowed_modules=['detection', 'recognition'], **kwargs)
+                # ctx_id=0 → GPU, ctx_id=-1 → CPU
+                try:
+                    import torch
+                    ctx = 0 if torch.cuda.is_available() else -1
+                except ImportError:
+                    ctx = -1
+                # det_size=(640,640) is recommended for CPU-only hosts;
+                # (896,896) was causing OOM crashes on Hugging Face
+                app.prepare(ctx_id=ctx, det_size=(640, 640), det_thresh=0.35)
+                self._app = app
+                self._load_error = None
+                self._state = 'ready'
+                logger.info(f"InsightFace '{self._model_pack}' loaded (ctx={'GPU' if ctx >= 0 else 'CPU'})")
+            except Exception as e:
+                logger.error(f"InsightFace load failed: {e}")
+                self._load_error = str(e)
+                self._state = 'failed'
+
+    def load_in_background(self):
+        """Start loading unless the model is already loaded or loading."""
+        if self._state in ('ready', 'loading'):
+            return
+        threading.Thread(target=self.load, daemon=True, name='face-engine-load').start()
 
     def is_ready(self):
-        return self._ready
+        return self._state == 'ready'
+
+    def state(self):
+        return self._state
 
     def get_load_error(self):
-        return getattr(self, 'load_error', None)
+        return self._load_error
+
+    def _faces(self, image_path):
+        if not self.is_ready():
+            raise EngineNotReady(self._load_error or 'Face engine is still loading')
+        import cv2
+        img = cv2.imread(image_path)
+        if img is None:
+            raise ImageUnreadable(image_path)
+        return self._app.get(img)
 
     def detect_and_embed(self, image_path: str):
         """
@@ -55,23 +98,11 @@ class FaceEngine:
 
         Returns:
             list of np.ndarray, one 512-dim embedding per detected face.
-            Empty list if no faces found or engine not ready.
+            Empty list only when the image really has no faces; problems raise
+            EngineNotReady or ImageUnreadable so a failure is never mistaken for "no faces".
         """
-        if not self._ready:
-            return []
-
-        img = cv2.imread(image_path)
-        if img is None:
-            logger.warning(f"Could not read image: {image_path}")
-            return []
-
-        try:
-            faces = self._app.get(img)
-            embeddings = [face.normed_embedding for face in faces if face.normed_embedding is not None]
-            return embeddings
-        except Exception as e:
-            logger.error(f"Embedding extraction failed for {image_path}: {e}")
-            return []
+        return [face.normed_embedding for face in self._faces(image_path)
+                if face.normed_embedding is not None]
 
     def get_user_embedding(self, image_path: str):
         """
@@ -81,30 +112,22 @@ class FaceEngine:
         Returns:
             np.ndarray of shape (512,) or None if no face detected.
         """
-        if not self._ready:
+        faces = self._faces(image_path)
+        if not faces:
             return None
-
-        img = cv2.imread(image_path)
-        if img is None:
-            return None
-
-        try:
-            faces = self._app.get(img)
-            if not faces:
-                return None
-            # Pick largest face by bounding box area
-            largest = max(faces, key=lambda f: (f.bbox[2] - f.bbox[0]) * (f.bbox[3] - f.bbox[1]))
-            return largest.normed_embedding
-        except Exception as e:
-            logger.error(f"User embedding failed: {e}")
-            return None
+        # Pick largest face by bounding box area
+        largest = max(faces, key=lambda f: (f.bbox[2] - f.bbox[0]) * (f.bbox[3] - f.bbox[1]))
+        return largest.normed_embedding
 
 
-# Singleton instance (loaded once)
 _engine_instance = None
+_engine_lock = threading.Lock()
 
-def get_engine(model_dir=None) -> FaceEngine:
+
+def get_engine() -> FaceEngine:
+    """The process-wide engine. Never loads the model itself; see FaceEngine.load()."""
     global _engine_instance
-    if _engine_instance is None:
-        _engine_instance = FaceEngine(model_dir=model_dir)
-    return _engine_instance
+    with _engine_lock:
+        if _engine_instance is None:
+            _engine_instance = FaceEngine(model_dir=Config.INSIGHTFACE_DIR)
+        return _engine_instance
