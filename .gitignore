@@ -1,10 +1,22 @@
-logs_archive/webapp_logs_output/LogFiles/2026_04_21_lw1sdlwk0002MY_docker.log
-logs.zip
-logs/
+# Secrets
 .env
-logs_archive/
+*.env
+!.env.example
+
+# Python
 __pycache__/
 *.pyc
 venv/
+.venv/
+.pytest_cache/
+
+# Runtime data
 models_cache/
-frontend_reference/images/
+storage/
+logs/
+logs.zip
+*.log
+
+# Private test photos for the accuracy benchmark
+benchmarks/data/
+benchmarks/results/

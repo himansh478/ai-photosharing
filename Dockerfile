@@ -5,8 +5,7 @@ FROM python:3.10-slim AS builder
 
 WORKDIR /build
 
-# Only runtime-needed system libs for compilation
-# cmake/git nahi chahiye kyunki hum prebuilt wheels use kar rahe hain
+# Compiler for the packages that have no prebuilt wheel (insightface)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
@@ -15,20 +14,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Upgrade pip once
 RUN pip install --no-cache-dir --upgrade pip
 
-# ── Key Optimization: insightface prebuilt wheel ──
-# Source se compile karne pe 10-15 min lagte hain
-# Yeh prebuilt wheel seedha install hota hai — 30 seconds mein
-RUN pip install --no-cache-dir \
-    "https://github.com/jimacoff/insightface-wheels/releases/download/v0.7.3/insightface-0.7.3-cp310-cp310-linux_x86_64.whl" \
-    || pip install --no-cache-dir --prefer-binary insightface==0.7.3
-
-# ── Baaki sab dependencies — prefer-binary se prebuilt wheels milte hain ──
-COPY backend/requirements.txt .
-RUN pip install --no-cache-dir --prefer-binary \
-    -r requirements.txt
+# Everything comes from PyPI; prefer-binary uses prebuilt wheels wherever they exist
+COPY requirements.txt .
+RUN pip install --no-cache-dir --prefer-binary -r requirements.txt
 
 
 # ─────────────────────────────────────────────
@@ -47,24 +37,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+# The app runs as an unprivileged user; uid 1000 is also what Hugging Face Spaces expects
+RUN useradd --create-home --uid 1000 appuser
+ENV HOME=/home/appuser
+
 # Builder se compiled virtual environment copy karo
 COPY --from=builder /opt/venv /opt/venv
-
-# Activate virtual environment
 ENV PATH="/opt/venv/bin:$PATH"
 
 # App source code copy karo (.dockerignore se unnecessary files skip hoti hain)
 COPY . .
 
-# Writable directories banana
+# The source stays read-only; only these two directories are writable
 RUN mkdir -p /app/models_cache /app/storage/temp && \
-    chmod -R 777 /app/models_cache /app/storage/temp
+    chown -R appuser:appuser /app/models_cache /app/storage
+
+USER appuser
 
 # Environment variables
 ENV PYTHONUNBUFFERED=1
 ENV PORT=7860
 ENV ENV=production
-ENV PYTHONPATH=/app/backend:/app
+ENV PYTHONPATH=/app
 ENV INSIGHTFACE_HOME=/app/models_cache
 
 EXPOSE 7860
@@ -72,4 +66,4 @@ EXPOSE 7860
 HEALTHCHECK --interval=30s --timeout=30s --start-period=120s --retries=3 \
     CMD curl -f http://localhost:7860/api/health || exit 1
 
-CMD ["waitress-serve", "--port=7860", "backend.app:app"]
+CMD ["waitress-serve", "--port=7860", "--threads=8", "backend.app:app"]

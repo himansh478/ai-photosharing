@@ -1,9 +1,0 @@
-{
-  "name": "github-actions",
-  "issuer": "https://token.actions.githubusercontent.com",
-  "subject": "repo:himansh478/landing-page-redesign:ref:refs/heads/main",
-  "description": "GitHub Actions",
-  "audiences": [
-    "api://AzureADTokenExchange"
-  ]
-}

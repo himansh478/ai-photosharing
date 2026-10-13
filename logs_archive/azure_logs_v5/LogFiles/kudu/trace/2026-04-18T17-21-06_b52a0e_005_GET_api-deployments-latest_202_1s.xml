@@ -1,9 +1,0 @@
-<step title="Incoming Request" date="2026-04-18T17:21:06.853" instance="b52a0e" url="/api/deployments/latest" method="GET" type="request" pid="769,1,20" Accept="*/*" Host="cwaya-ai-share.scm.azurewebsites.net" User-Agent="AZURECLI/2.85.0 (MSI)" Accept-Encoding="gzip, deflate" Authorization="Bea..." x-ms-client-request-id="d2851a77-3b4a-11f1-a11d-e6698d3df05d" X-ARR-LOG-ID="d2851a77-3b4a-11f1-a11d-e6698d3df05d" CLIENT-IP="106.76.93.92:48112" X-SITE-DEPLOYMENT-ID="cwaya-ai-share" WAS-DEFAULT-HOSTNAME="cwaya-ai-share.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest" X-Client-IP="106.76.93.92" X-Client-Port="48112" >
-  <step title="Cleanup Xml Logs" date="2026-04-18T17:21:06.865" /><!-- duration: 20ms -->
-  <step title="DeploymentService.GetResult" date="2026-04-18T17:21:06.973" >
-    <step title="DeploymentService.GetLatestDeployment" date="2026-04-18T17:21:06.984" >
-      <step title="DeploymentManager.GetResults" date="2026-04-18T17:21:06.995" /><!-- duration: 498ms -->
-    </step><!-- duration: 550ms -->
-  </step><!-- duration: 590ms -->
-  <step title="Outgoing response" date="2026-04-18T17:21:07.836" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 19ms -->
-</step><!-- duration: 1031ms -->

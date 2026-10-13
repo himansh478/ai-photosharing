@@ -1,10 +1,12 @@
 name: Build and Deploy to Azure App Service
 
+# Manual only. A deploy is a deliberate action, started from the Actions tab,
+# and it runs the test suite first.
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 env:
   ACR_NAME: cwayaacr
@@ -13,7 +15,41 @@ env:
   WEBAPP_NAME: cwaya-ai-share
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-test.txt
+
+      - name: Run tests
+        env:
+          TEST_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable
+        run: pytest -q
+
   build-and-deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,27 +60,12 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run failing test (debug)
-        env:
-          PYTHONPATH: ${{ github.workspace }}
-        run: |
-          pytest -q -k test_verify_code_valid -s
-        # Temporary: run only failing test with -s for debug; revert after fix
-        # If tests fail the job will stop here and image will not be built
-
       - name: Build and Push Image (ACR)
         run: |
-          az acr build --registry "$ACR_NAME" --image "$IMAGE_NAME:latest" --file azure.Dockerfile .
+          az acr build --registry "$ACR_NAME" \
+            --image "$IMAGE_NAME:${{ github.sha }}" \
+            --image "$IMAGE_NAME:latest" \
+            --file Dockerfile .
 
       - name: Restart Web App
         run: |
