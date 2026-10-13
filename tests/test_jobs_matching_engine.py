@@ -108,6 +108,20 @@ def test_engine_loads_once_even_when_many_threads_ask(monkeypatch):
     assert len(loads) == 1
 
 
+def test_background_load_starts_a_single_loader(monkeypatch):
+    loads = []
+    _fake_insightface(monkeypatch, loads, delay=0.1)
+    engine = FaceEngine()
+    for _ in range(20):
+        engine.load_in_background()
+    assert engine.state() == 'loading'
+
+    deadline = time.time() + 5
+    while not engine.is_ready() and time.time() < deadline:
+        time.sleep(0.02)
+    assert engine.is_ready() and len(loads) == 1
+
+
 def test_failed_load_is_reported_and_can_be_retried(monkeypatch):
     loads = []
     _fake_insightface(monkeypatch, loads, fail=True)

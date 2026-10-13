@@ -28,6 +28,7 @@ class FaceEngine:
         self._state = 'not_loaded'   # not_loaded | loading | ready | failed
         self._load_error = None
         self._load_lock = threading.Lock()
+        self._state_lock = threading.Lock()
 
     @property
     def model_version(self):
@@ -70,8 +71,12 @@ class FaceEngine:
 
     def load_in_background(self):
         """Start loading unless the model is already loaded or loading."""
-        if self._state in ('ready', 'loading'):
-            return
+        # Claim the 'loading' state before starting the thread, so a burst of requests
+        # arriving while the model is down starts one loader, not one per request.
+        with self._state_lock:
+            if self._state in ('ready', 'loading'):
+                return
+            self._state = 'loading'
         threading.Thread(target=self.load, daemon=True, name='face-engine-load').start()
 
     def is_ready(self):

@@ -28,6 +28,7 @@ UPLOAD_EXECUTOR = ThreadPoolExecutor(max_workers=5)
 
 _EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 _MAX_FIELD_LENGTH = 120
+_MAX_FILENAME_LENGTH = 200
 
 
 def _authorised_event(code, allowed_roles):
@@ -136,7 +137,8 @@ def upload_batch():
         job = registry.create(event['id'])
 
     # 1. Save all files to TEMP first for processing
-    to_process = [{'temp_path': storage_service.save_to_temp(f), 'filename': f.filename} for f in files]
+    to_process = [{'temp_path': storage_service.save_to_temp(f), 'filename': f.filename[:_MAX_FILENAME_LENGTH]}
+                  for f in files]
 
     # 2. Start async processing and cloud upload
     job.add_batch(len(to_process))
