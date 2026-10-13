@@ -39,7 +39,8 @@ from backend.database import repo  # noqa: E402
 from backend.extensions import limiter  # noqa: E402
 from backend.models import face_engine  # noqa: E402
 from backend.services import storage_service  # noqa: E402
-from tests.fakes import FakeEngine, FakeRepo  # noqa: E402
+from backend.services.jobs import registry  # noqa: E402
+from tests.fakes import FakeEngine, FakeRepo, wait_for  # noqa: E402
 
 needs_numpy = pytest.mark.skipif(not HAVE_NUMPY, reason='numpy is not importable on this machine')
 
@@ -72,8 +73,13 @@ def engine(monkeypatch):
 def client(fake_repo, storage, engine):
     limiter.enabled = False
     yield flask_app.test_client()
+    # Uploads keep running on background threads after the request returns. Let them finish
+    # before the fakes are torn down, or a straggler writes into the next test's database.
+    finished = wait_for(lambda: all(job.is_finished() for job in list(registry._jobs.values())))
+    registry._jobs.clear()
     limiter.enabled = True
     limiter.reset()
+    assert finished, 'an upload job was still running when the test ended'
 
 
 def make_image(fmt='JPEG', size=(64, 48), color=(120, 30, 200)):

@@ -1,4 +1,5 @@
 """In-memory stand-ins for the database and the face model, used by the unit tests."""
+import threading
 import time
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -17,6 +18,9 @@ class FakeRepo:
         self.sessions = {}
         self.session_photos = set()
         self.downloads = []
+        # The real database makes "insert unless this file is already there" atomic
+        # (unique index + ON CONFLICT); the fake needs a lock to behave the same way.
+        self._insert_lock = threading.Lock()
 
     # --- Events ---
     def create_event(self, event_id, name, email, event_name, event_type, code,
@@ -74,14 +78,15 @@ class FakeRepo:
 
     def insert_photo(self, photo_id, event_id, file_key, thumbnail_key, filename, face_count,
                      embeddings_json, sha256, model_version):
-        if sha256 and self.photo_hash_exists(event_id, sha256):
-            return False
-        self.photos[photo_id] = dict(
-            id=photo_id, photographer_id=event_id, file_path=file_key, thumbnail_path=thumbnail_key,
-            original_filename=filename, face_count=face_count, embeddings=embeddings_json,
-            sha256=sha256, model_version=model_version, uploaded_at=time.time())
-        self.events[event_id]['total_photos'] += 1
-        return True
+        with self._insert_lock:
+            if sha256 and self.photo_hash_exists(event_id, sha256):
+                return False
+            self.photos[photo_id] = dict(
+                id=photo_id, photographer_id=event_id, file_path=file_key, thumbnail_path=thumbnail_key,
+                original_filename=filename, face_count=face_count, embeddings=embeddings_json,
+                sha256=sha256, model_version=model_version, uploaded_at=time.time())
+            self.events[event_id]['total_photos'] += 1
+            return True
 
     def event_face_rows(self, event_id):
         return [dict(id=p['id'], thumbnail_path=p['thumbnail_path'], embeddings=p['embeddings'])
