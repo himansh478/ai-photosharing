@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find My Photos | PhotoAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
     <style>
         *,
         *::before,
@@ -468,6 +466,7 @@
             color: #FF9CAE;
         }
     </style>
+    <link rel="stylesheet" href="/static/css/shared.css">
 </head>
 
 <body>
@@ -478,19 +477,18 @@
 
     <div class="main">
         <h1>🔍 Find Your Photos</h1>
-        <p class="subtitle">Enter the event code shared by your photographer, then upload a selfie.</p>
+        <p class="subtitle">Enter the event code shared by your photographer, then take a selfie.</p>
 
         <!-- Step 1: Code -->
         <div class="card">
-            <label
+            <label for="codeInput"
                 style="font-size:0.85rem; font-weight:600; color:var(--muted); margin-bottom:8px; display:block; letter-spacing:0.3px;">Event
                 Code</label>
             <div class="code-row">
-                <input class="code-input" id="codeInput" placeholder="e.g. EVT-2024-ABC123"
-                    onkeydown="if(event.key==='Enter') verifyCode()">
-                <button class="btn-primary" onclick="verifyCode()" id="verifyBtn">Verify →</button>
+                <input class="code-input" id="codeInput" placeholder="e.g. EVT-ABCDEFGHJK" autocomplete="off">
+                <button class="btn-primary" id="verifyBtn">Verify →</button>
             </div>
-            <div id="codeError" class="alert alert-error" style="display:none; margin-top:16px;"></div>
+            <div id="codeError" class="alert alert-error hidden" style="margin-top:16px;"></div>
         </div>
 
         <!-- Event Banner -->
@@ -502,196 +500,85 @@
             </div>
         </div>
 
-        <!-- Step 2: Selfie Upload -->
+        <!-- Step 2: Selfie -->
         <div class="selfie-section" id="selfieSection">
             <div class="card" style="padding:0;">
-                <div class="selfie-drop" id="selfieDropZone" onclick="document.getElementById('selfieInput').click()">
+                <div class="selfie-drop" id="selfieDropZone">
                     <div class="selfie-placeholder">
                         <div style="font-size:3rem; margin-bottom:16px;">📸</div>
-                        <div style="font-size:1.1rem; font-weight:600; margin-bottom:8px;">Upload your selfie</div>
-                        <div style="font-size:0.85rem; color:var(--muted);">We'll find every photo where your face
-                            appears</div>
+                        <div style="font-size:1.1rem; font-weight:600; margin-bottom:8px;">Take a selfie</div>
+                        <div style="font-size:0.85rem; color:var(--muted);">Face the camera in good light, without
+                            sunglasses or a mask</div>
                     </div>
                     <img class="selfie-preview" id="selfiePreview" alt="Your selfie">
                 </div>
-                <input type="file" id="selfieInput" accept="image/*">
+                <input type="file" id="selfieCameraInput" accept="image/*" capture="user" class="hidden">
+                <input type="file" id="selfieFileInput" accept="image/*" class="hidden">
             </div>
-            <div id="selfieError" class="alert alert-error" style="display:none;"></div>
-            <button class="search-btn" id="searchBtn" onclick="searchPhotos()" disabled>🔍 Find My Photos</button>
+            <div class="button-row" style="justify-content: center;">
+                <button class="btn-secondary" id="takeSelfieBtn">📷 Take a selfie</button>
+                <button class="btn-secondary" id="chooseSelfieBtn">🖼 Choose a photo</button>
+            </div>
+
+            <label class="consent">
+                <input type="checkbox" id="consentCheck">
+                <span>I agree that my selfie is used to find photos of my face in this event.
+                    The selfie itself is deleted right after the search and is never stored.
+                    <br><span class="hint">मैं सहमत हूँ कि मेरी सेल्फी सिर्फ़ इस इवेंट में मेरी फ़ोटो ढूँढने के लिए
+                        इस्तेमाल होगी। सेल्फी सेव नहीं की जाती।</span></span>
+            </label>
+
+            <div id="selfieError" class="alert alert-error hidden"></div>
+            <button class="search-btn" id="searchBtn" disabled>🔍 Find My Photos</button>
         </div>
 
         <!-- Loading -->
         <div class="loading-section" id="loadingSection">
             <div class="spinner"></div>
             <div class="loading-text">AI is scanning photos...</div>
-            <div class="loading-sub">Comparing your face against all event photos. This may take 5–30 seconds.</div>
+            <div class="loading-sub" id="loadingSub"></div>
         </div>
 
         <!-- Results -->
-        <div id="resultsSection" style="display:none;">
+        <div id="resultsSection" class="hidden">
             <div class="results-header">
                 <div class="results-count">Found <span id="matchCount">0</span> photos of you</div>
-                <button class="reset-btn" onclick="resetSearch()">← Search Again</button>
+                <button class="reset-btn" id="resetBtn">← Search Again</button>
             </div>
             <div class="gallery" id="gallery"></div>
-            <div id="noResults" class="no-results" style="display:none;">
+            <div id="noResults" class="no-results hidden">
                 <div class="no-results-icon">😕</div>
                 <h3>No matching photos found</h3>
-                <p>Try uploading a clearer selfie with good lighting, or ask the photographer if processing is complete.
+                <p>Try a clearer selfie in good light, or ask the photographer whether all photos have been uploaded.
                 </p>
+            </div>
+
+            <div id="commonSection" class="hidden">
+                <div class="results-section-title" id="commonTitle">Photos for everyone</div>
+                <div class="hint" style="margin-bottom: 12px;">Decor, rituals and venue photos shared with all guests.</div>
+                <div class="gallery" id="commonGallery"></div>
+                <div class="button-row" style="justify-content: center;">
+                    <button class="btn-secondary hidden" id="commonMoreBtn">Show more</button>
+                </div>
+            </div>
+
+            <div class="footer-actions">
+                <div class="hint" style="margin-bottom: 10px;">Your links work for 7 days. You can remove your search
+                    and its history at any time.</div>
+                <button class="btn-danger" id="deleteDataBtn">Delete my data</button>
             </div>
         </div>
     </div>
 
     <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <div class="lightbox" id="lightbox">
         <span class="lb-close">✕</span>
-        <img id="lbImg" src="" alt="Full photo">
+        <img id="lbImg" alt="Full photo">
     </div>
 
-    <script>
-        let currentCode = null;
-        let photographerId = null;
-        let currentSessionId = null;
-        let currentPhotos = [];
-
-        // ─── Selfie drag/drop ───
-        const selfieDropZone = document.getElementById('selfieDropZone');
-        selfieDropZone.addEventListener('dragover', e => { e.preventDefault(); selfieDropZone.style.borderColor = 'var(--accent)'; });
-        selfieDropZone.addEventListener('dragleave', () => selfieDropZone.style.borderColor = '');
-        selfieDropZone.addEventListener('drop', e => { e.preventDefault(); handleSelfieFile(e.dataTransfer.files[0]); });
-        document.getElementById('selfieInput').addEventListener('change', e => handleSelfieFile(e.target.files[0]));
-
-        function handleSelfieFile(file) {
-            if (!file || !file.type.match(/^image\//)) return;
-            const reader = new FileReader();
-            reader.onload = e => {
-                document.getElementById('selfiePreview').src = e.target.result;
-                selfieDropZone.classList.add('has-preview');
-            };
-            reader.readAsDataURL(file);
-            document.getElementById('searchBtn').disabled = false;
-        }
-
-        // ─── Verify Code ───
-        async function verifyCode() {
-            const code = document.getElementById('codeInput').value.trim().toUpperCase();
-            const errEl = document.getElementById('codeError');
-            errEl.style.display = 'none';
-
-            if (!code) { errEl.textContent = 'Please enter the event code.'; errEl.style.display = 'block'; return; }
-
-            const btn = document.getElementById('verifyBtn');
-            btn.disabled = true; btn.textContent = 'Verifying...';
-
-            try {
-                const res = await fetch('/api/user/verify-code', {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ code })
-                });
-                const data = await res.json();
-                if (!res.ok || !data.valid) throw new Error(data.error || 'Invalid event code');
-
-                currentCode = code;
-                photographerId = data.photographer_id;
-                document.getElementById('eventName').textContent = data.event_name;
-                document.getElementById('eventPhotog').textContent = `By ${data.photographer_name} · ${data.total_photos} photos`;
-                document.getElementById('eventBanner').classList.add('show');
-                document.getElementById('selfieSection').classList.add('show');
-                btn.textContent = '✓ Verified';
-            } catch (e) {
-                errEl.textContent = e.message; errEl.style.display = 'block';
-                btn.disabled = false; btn.textContent = 'Verify →';
-            }
-        }
-
-        // ─── Search ───
-        async function searchPhotos() {
-            const file = document.getElementById('selfieInput').files[0];
-            if (!file) return;
-            const errEl = document.getElementById('selfieError');
-            errEl.style.display = 'none';
-
-            document.getElementById('selfieSection').style.display = 'none';
-            document.getElementById('eventBanner').classList.remove('show');
-            document.getElementById('loadingSection').classList.add('show');
-
-            let finalFile = file;
-            try {
-                finalFile = await imageCompression(file, { maxSizeMB: 0.8, maxWidthOrHeight: 1920, useWebWorker: true });
-            } catch (e) {
-                console.error("Selfie compression failed", e);
-            }
-
-            const formData = new FormData();
-            formData.append('code', currentCode);
-            formData.append('photo', finalFile, finalFile.name || 'selfie.jpg');
-
-            try {
-                const res = await fetch('/api/user/upload-selfie', { method: 'POST', body: formData });
-                const data = await res.json();
-                document.getElementById('loadingSection').classList.remove('show');
-
-                if (!res.ok) throw new Error(data.error || 'Search failed');
-
-                currentSessionId = data.session_id;
-                currentPhotos = data.photos;
-                showResults(data.photos);
-            } catch (e) {
-                document.getElementById('loadingSection').classList.remove('show');
-                document.getElementById('selfieSection').style.display = 'block';
-                document.getElementById('eventBanner').classList.add('show');
-                errEl.textContent = e.message; errEl.style.display = 'block';
-            }
-        }
-
-        function showResults(photos) {
-            const section = document.getElementById('resultsSection');
-            const gallery = document.getElementById('gallery');
-            const noResults = document.getElementById('noResults');
-            section.style.display = 'block';
-            document.getElementById('matchCount').textContent = photos.length;
-
-            if (photos.length === 0) { noResults.style.display = 'block'; gallery.style.display = 'none'; return; }
-            noResults.style.display = 'none'; gallery.style.display = 'grid';
-            gallery.innerHTML = '';
-
-            photos.forEach((photo, idx) => {
-                const pct = Math.round(photo.similarity * 100);
-                const card = document.createElement('div');
-                card.className = 'photo-card';
-                card.innerHTML = `
-                    <img src="${photo.thumbnail_url}" class="photo-thumb" alt="Photo ${idx + 1}" onclick="openLightbox('${photo.thumbnail_url}')" loading="lazy">
-                    <div class="photo-info">
-                        <div class="match-score">✦ ${pct}% match</div>
-                        <a href="${photo.download_url}" class="dl-btn" download>⬇ Download</a>
-                    </div>
-                `;
-                gallery.appendChild(card);
-            });
-        }
-
-        function resetSearch() {
-            document.getElementById('resultsSection').style.display = 'none';
-            document.getElementById('selfieSection').style.display = 'block';
-            document.getElementById('selfieSection').classList.add('show');
-            document.getElementById('eventBanner').classList.add('show');
-            selfieDropZone.classList.remove('has-preview');
-            document.getElementById('selfiePreview').src = '';
-            document.getElementById('selfieInput').value = '';
-            document.getElementById('searchBtn').disabled = true;
-        }
-
-        // ─── Lightbox ───
-        function openLightbox(src) {
-            document.getElementById('lbImg').src = src;
-            document.getElementById('lightbox').classList.add('open');
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('open');
-        }
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-    </script>
+    <script src="/static/vendor/browser-image-compression.js" defer></script>
+    <script src="/static/js/common.js" defer></script>
+    <script src="/static/js/user.js" defer></script>
 </body>
 
 </html>
