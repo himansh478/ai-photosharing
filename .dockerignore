@@ -55,9 +55,6 @@ storage/temp/
 storage/photos/
 storage/thumbnails/
 
-# Test files (production mein nahi chahiye)
-backend/test_*.py
-backend/*_debug*.py
 
 # IDE & OS files
 .vscode/
@@ -85,3 +82,20 @@ huggingface_upload.py
 backend/huggingface_upload.py
 backend/hf_deploy_full.py
 backend/hf_cleanup.py
+
+# Not needed inside the image
+tests/
+benchmarks/
+scripts/
+.github/
+.azure/
+storage/
+ROADMAP.md
+README.md
+generate_ppt.py
+deploy-azure.ps1
+startup.sh
+requirements-dev.txt
+requirements-test.txt
+hf-space-AI/
+AIPPHOTO_SHARING/

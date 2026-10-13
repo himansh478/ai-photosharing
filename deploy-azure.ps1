@@ -20,7 +20,7 @@ az acr create --resource-group $RESOURCE_GROUP --name $ACR_NAME --sku Basic
 # 3. Build & Push Image using ACR (Cloud Build)
 Write-Host "[3/4] Building image in ACR (Cloud Build)..." -ForegroundColor Yellow
 az acr update -n $ACR_NAME --admin-enabled true
-az acr build --registry $ACR_NAME --image "${IMAGE_NAME}:latest" --file azure.Dockerfile .
+az acr build --registry $ACR_NAME --image "${IMAGE_NAME}:latest" --file Dockerfile .
 
 # 4. Create App Service for Containers (if not exists)
 Write-Host "[4/4] Configuring Web App for Containers..." -ForegroundColor Yellow

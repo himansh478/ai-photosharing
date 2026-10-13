@@ -1,0 +1,16 @@
+# Enough to run the test suite: everything except the face-model stack
+# (insightface, onnxruntime, opencv), which the tests replace with a fake.
+# Versions come from requirements.txt so the two files cannot drift apart.
+-c requirements.txt
+Flask
+Werkzeug
+flask-cors
+flask-limiter
+numpy
+Pillow
+psycopg2-binary
+huggingface_hub
+requests
+python-dotenv
+sentry-sdk
+pytest==8.3.4
