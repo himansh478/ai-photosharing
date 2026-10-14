@@ -73,3 +73,38 @@ def test_pages_are_served(client):
         assert response.status_code == 200
         assert b'<html' in response.data.lower()
 
+
+
+def test_ready_reports_each_dependency(client, monkeypatch):
+    from contextlib import contextmanager
+
+    from backend import app as app_module
+
+    class Cursor:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+        def execute(self, _sql):
+            pass
+
+    @contextmanager
+    def working_db():
+        yield type('Conn', (), {'cursor': lambda self: Cursor()})()
+
+    monkeypatch.setattr(app_module, 'get_db_conn', working_db)
+    monkeypatch.setattr(app_module.Config, 'STORAGE_BACKEND', 'hf')
+    monkeypatch.setattr(app_module.Config, 'HF_DATASET_ID', 'someone/photos')
+    monkeypatch.setattr(app_module.Config, 'HF_TOKEN', 'token-value')
+
+    response = client.get('/api/ready')
+    assert response.status_code == 200
+    assert response.get_json() == {'ready': True, 'face_engine': 'ready', 'database': 'ok', 'storage': 'ok'}
+    assert b'token-value' not in response.data and b'someone/photos' not in response.data
+
+    monkeypatch.setattr(app_module.Config, 'HF_TOKEN', None)
+    response = client.get('/api/ready')
+    assert response.status_code == 503
+    assert response.get_json()['storage'] == 'not configured'

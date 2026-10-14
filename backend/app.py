@@ -156,11 +156,14 @@ def ready():
     except Exception as e:
         logger.warning(f"Readiness check: database unavailable: {e}")
         database_ready = False
-    ready_now = engine_ready and database_ready
+    # Only whether the settings exist; their values never leave the server.
+    storage_ready = Config.STORAGE_BACKEND == 'local' or bool(Config.HF_TOKEN and Config.HF_DATASET_ID)
+    ready_now = engine_ready and database_ready and storage_ready
     return jsonify({
         'ready': ready_now,
         'face_engine': get_engine().state(),
         'database': 'ok' if database_ready else 'unavailable',
+        'storage': 'ok' if storage_ready else 'not configured',
     }), 200 if ready_now else 503
 
 
